@@ -10,12 +10,11 @@ const app = new Vue({
 })
 
 
-Vue.component('examp', require('./components/ExampleComponent.vue'));
-const exam = new Vue({
-    el: '#exam'
-});
+// Vue.component('examp', require('./components/ExampleComponent.vue'));
+// const exam = new Vue({
+//     el: '#exam',
+//     data: {
+//         etext: 'TESTMESSAGE',//呼び出せてない
+//     }
+// });
 
-Vue.component('examp1', require('./components/Test1.vue'));
-const exam1 = new Vue({
-    el: '#exam1'
-});

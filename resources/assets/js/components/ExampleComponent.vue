@@ -8,6 +8,7 @@
                     <div class="card-body">
                         I'm an example component.
                     </div>
+                    <p>START{{ extext }}END</p>
                 </div>
             </div>
         </div>
@@ -17,7 +18,12 @@
 <script>
     export default {
         mounted() {
-            console.log('Component mounted.')
+            console.log('ExampleComponent.vue mounted.')//vue読み込みの確認
+        },
+        data() {
+            return {
+                extext: 'testetstetstettesttesttesttesttesttestestettesttest',
+            }
         }
     }
 </script>
