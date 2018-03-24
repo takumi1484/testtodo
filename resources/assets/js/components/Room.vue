@@ -131,7 +131,7 @@
                 axios.post('api/postapi/' , {
                     body: this.newBody,
                     user_name: this.newName,
-                    ip: '0000000',
+                    ip: '0000000',//ここを''つまりnullだとエラーだった。httpエラー500
                     room_id: this.id,
                     // created_at: '123456789',
                 })
