@@ -6,7 +6,9 @@
             <li v-if="id === fmessage.room_id">
                 <!--v-if:ifによってroom_idがroom1の投稿のみを表示。今回はroom1に限定して作成する。'room1'を変数に置き換えれば部屋分け可能   追記：queryを利用したらコンポーネント一つでの部屋分けができたがより良い方法がありそう
                 追記２そもそもデータベース"すべて"呼び込んでからifで分けるのは非効率的すぎる。laravelのmiddlewareかcontrollerでwhereしたほうが良い。その場合、queryからルーム判別する方式は変える必要がありそう
-                追記３queryデータを利用して取得データを制限することができるかもしれない-->
+                追記３queryデータを利用して取得データを制限することができるかもしれない
+                追記４apiでのuri指定でidを利用することによりaxiosで受け取るデータを制限できた。v-ifのくだりはもう不要
+                -->
                 <hr>
                 <div>{{ fmessage.user_name }}　　{{ fmessage.created_at }}</div>
                 <div>{{ fmessage.body }}</div>
@@ -28,8 +30,8 @@
     export default {
         mounted() {//このvueコンポーネントがマウント(読み込み)された時に一度読み込まれる
             console.log('Room.vue mounted.');   //vue読み込みの確認
-            this.id = location.search;
-            this.id = this.id.slice( 4 );
+            this.id = location.search;//url取得
+            this.id = this.id.slice( 4 );//query(urlの?以降のやつ)から頭4字を消してroom_idに変換
             this.showAlert = false;
             this.getPost();
         },
@@ -75,7 +77,7 @@
                     this.alertMessage = '一回の投稿は50字以内にしてください';
                     return false;
                 }
-                if (this.newBody.indexOf("function") !== -1) {//vue上で行えるバリデーションぽいもの。別ファイルにするくらいならわかりやすいかもしれない
+                if (this.newBody.indexOf("function") !== -1) {//vue上で行えるバリデーションぽいもの。別ファイルにするくらいならわかりやすいかもしれない。middlewareとか挟むより使いやすいバリデーションな気がする
                     this.showAlert = true;
                     this.alertMessage = 'やめなさい';
                     //location.href = "https://www.google.com/teapot";リンクに飛ばす
@@ -103,6 +105,7 @@
                     room_id: this.id,                             //room1を後で何らかの変数に変えればルーム追加できる
                     created_at: '2000-01-01 00:00:00',         //作成日時。jsでなくデータベースから取れそう？むしろjsで取得した値はcreated_atに入れられないのでは？？
                     };
+                this.sendPost();
                 this.messages.push(item);                         //A.push(B) Aの配列の最後にデータBを挿入
                 this.newBody = '';                                 //body入力後、フォーム内を削除。(newItemはフォーム内の文字と動的に結びついている )
             },
@@ -116,18 +119,27 @@
                 //     this.messages = res.data
                 // })
                 //alert(this.messages);
-                // axios.get('api/postapi/' + this.id)方法２:失敗
-                //     .then(function (response) {
-                //         console.log(response);
-                //     })
-                //     .catch(function (error) {
-                //         console.log(error);
-                //     });
-                axios.get('api/postapi/' + this.id)
+
+                axios.get('api/postapi/' + this.id)//無事に取得できた。jsのオブジェクトに関する知識不足でうまくデータが取り出せなかった。オブジェクトから値を取り出すには　オブジェクト名[オブジェクト内のデータの名前]　jsの規則にのっとったデータ名(予約語、特殊文字を含まない)なら.でも呼べる
                     .then(response => {
-                        console.log(response);
+                        console.log(response);//consoleによる出力はchromeの検証などから確認できる
                         this.messages = response.data;
-                        alert(response["data"]);//オブジェクトから値を取り出すには　オブジェクト名[オブジェクト内のデータの名前]　jsの規則にのっとったデータ名(予約語、特殊文字を含まない)なら.でも呼べる
+                        //alert(response["data"]);//個々の記述はresponse.dataでも一緒。　問題点：このalertではデータの中身は表示されずobjectと表示される。オブジェクトから個々のデータを取り出したい場合を学ぶべき(3/24)。
+                    });
+            },
+            sendPost(){
+                axios.post('api/postapi/' , {
+                    body: this.newBody,
+                    user_name: this.newName,
+                    ip: '0000000',
+                    room_id: this.id,
+                    // created_at: '123456789',
+                })
+                    .then(response => {
+                        // this.messages[response.data.id] = response.data;
+                        this.name = '';
+                        this.showAlert = false;
+                        this.alertMessage = '';//未実装：「送信しました」という通知を表示させる
                     });
             },
             voidScan(){

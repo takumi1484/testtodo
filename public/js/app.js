@@ -28444,13 +28444,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
         //このvueコンポーネントがマウント(読み込み)された時に一度読み込まれる
         console.log('Room.vue mounted.'); //vue読み込みの確認
-        this.id = location.search;
-        this.id = this.id.slice(4);
+        this.id = location.search; //url取得
+        this.id = this.id.slice(4); //query(urlの?以降のやつ)から頭4字を消してroom_idに変換
         this.showAlert = false;
         this.getPost();
     },
@@ -28500,7 +28502,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 return false;
             }
             if (this.newBody.indexOf("function") !== -1) {
-                //vue上で行えるバリデーションぽいもの。別ファイルにするくらいならわかりやすいかもしれない
+                //vue上で行えるバリデーションぽいもの。別ファイルにするくらいならわかりやすいかもしれない。middlewareとか挟むより使いやすいバリデーションな気がする
                 this.showAlert = true;
                 this.alertMessage = 'やめなさい';
                 //location.href = "https://www.google.com/teapot";リンクに飛ばす
@@ -28528,6 +28530,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 room_id: this.id, //room1を後で何らかの変数に変えればルーム追加できる
                 created_at: '2000-01-01 00:00:00' //作成日時。jsでなくデータベースから取れそう？むしろjsで取得した値はcreated_atに入れられないのでは？？
             };
+            this.sendPost();
             this.messages.push(item); //A.push(B) Aの配列の最後にデータBを挿入
             this.newBody = ''; //body入力後、フォーム内を削除。(newItemはフォーム内の文字と動的に結びついている )
         },
@@ -28543,17 +28546,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             //     this.messages = res.data
             // })
             //alert(this.messages);
-            // axios.get('api/postapi/' + this.id)方法２:失敗
-            //     .then(function (response) {
-            //         console.log(response);
-            //     })
-            //     .catch(function (error) {
-            //         console.log(error);
-            //     });
-            axios.get('api/postapi/' + this.id).then(function (response) {
-                console.log(response);
+
+            axios.get('api/postapi/' + this.id) //無事に取得できた。jsのオブジェクトに関する知識不足でうまくデータが取り出せなかった。オブジェクトから値を取り出すには　オブジェクト名[オブジェクト内のデータの名前]　jsの規則にのっとったデータ名(予約語、特殊文字を含まない)なら.でも呼べる
+            .then(function (response) {
+                console.log(response); //consoleによる出力はchromeの検証などから確認できる
                 _this.messages = response.data;
-                alert(response["data"]); //オブジェクトから値を取り出すには　オブジェクト名[オブジェクト内のデータの名前]　jsの規則にのっとったデータ名(予約語、特殊文字を含まない)なら.でも呼べる
+                //alert(response["data"]);//個々の記述はresponse.dataでも一緒。　問題点：このalertではデータの中身は表示されずobjectと表示される。オブジェクトから個々のデータを取り出したい場合を学ぶべき(3/24)。
+            });
+        },
+        sendPost: function sendPost() {
+            var _this2 = this;
+
+            axios.post('api/postapi/', {
+                body: this.newBody,
+                user_name: this.newName,
+                ip: '0000000',
+                room_id: this.id
+                // created_at: '123456789',
+            }).then(function (response) {
+                // this.messages[response.data.id] = response.data;
+                _this2.name = '';
+                _this2.showAlert = false;
+                _this2.alertMessage = ''; //未実装：「送信しました」という通知を表示させる
             });
         },
         voidScan: function voidScan() {}
