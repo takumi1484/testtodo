@@ -17,6 +17,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
 Route::group(['middleware' => 'api'], function () {
-    Route::resource('posts',  'PostsController');
+    Route::resource('postapi','PostsController');
 });
+
+
+//Route::middleware('api')->get('/postapi',function (){//authに似せて書いただけ。信憑性皆無
+//    Route::resource('/postapi/{id}',  'PostsController');});

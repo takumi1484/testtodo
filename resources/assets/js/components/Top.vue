@@ -61,6 +61,7 @@
                 serchbox: "",
                 showAlert: false,
                 alertMessage: '',
+                newRoomName: '',
             }
         },
     }

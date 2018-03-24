@@ -14,11 +14,18 @@
 //Route::get('/', function () {
 //    return view('welcome');
 //});
+//
+//Route::get('/{any}', function () {
+//    return view('testapp');
+//})->where('any', '.*');
 
-Route::get('/{any}', function () {
+Route::get('/', function () {
     return view('testapp');
 })->where('any', '.*');
+
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::resource('json',  'PostsController');

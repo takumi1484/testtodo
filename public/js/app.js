@@ -25378,7 +25378,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]);
 
 /* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
-    mode: 'history',
+    mode: 'history', //問題ありそうな場所
     routes: [{ path: '/Top', component: __webpack_require__(8) }, { path: '/Room', component: __webpack_require__(27) }, { path: '/', component: __webpack_require__(8) }],
     scrollBehavior: function scrollBehavior(to, from, savedPosition) {
         if (savedPosition) {
@@ -28054,7 +28054,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -28161,7 +28161,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }],
             serchbox: "",
             showAlert: false,
-            alertMessage: ''
+            alertMessage: '',
+            newRoomName: ''
         };
     }
 });
@@ -28443,8 +28444,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
@@ -28452,27 +28451,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         console.log('Room.vue mounted.'); //vue読み込みの確認
         this.id = location.search;
         this.id = this.id.slice(4);
+        this.showAlert = false;
+        this.getPost();
     },
     data: function data() {
         //テストデータ。このデータ形式に合わせてDBからデータを呼び込む
         return {
-            messages: [{
-                body: 'testmessage',
-                user_name: 'testuserA',
-                room_id: 'room1',
-                created_at: '2000-01-01 00:00:00'
-            }, {
-                body: 'testmessageadasdasdasd',
-                user_name: 'testuserA',
-                room_id: 'room1',
-                created_at: '2000-01-01 00:00:00'
-            }, {
-                body: 'testmessage222222222222222222222222',
-                user_name: 'testuserA',
-                room_id: 'room2',
-                created_at: '2000-01-01 00:00:00'
-            }],
-            showAlert: false,
+            messages: []
+            //     [{
+            //     body: 'testmessage',
+            //     user_name: 'testuserA',
+            //     ip: '',
+            //     room_id: 'room1',
+            //     created_at: '2000-01-01 00:00:00',
+            // },{
+            //     body: 'testmessageadasdasdasd',
+            //     user_name: 'testuserA',
+            //     ip: '',
+            //     room_id: 'room1',
+            //     created_at: '2000-01-01 00:00:00',
+            // },{
+            //     body: 'testmessage222222222222222222222222',
+            //     user_name: 'testuserA',
+            //     ip: '',
+            //     room_id: 'room2',
+            //     created_at: '2000-01-01 00:00:00',
+            // }]
+
+            , showAlert: false,
             alertMessage: '',
             newBody: '',
             newName: '名無し',
@@ -28486,6 +28492,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (this.newBody === '') {
                 this.showAlert = true;
                 this.alertMessage = '内容のない投稿はできません';
+                return false;
+            }
+            if (this.newBody.length > 50) {
+                this.showAlert = true;
+                this.alertMessage = '一回の投稿は50字以内にしてください';
                 return false;
             }
             if (this.newBody.indexOf("function") !== -1) {
@@ -28513,12 +28524,39 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var item = { //新しい投稿に入れる各種データ
                 body: this.newBody, //フォームより入力
                 user_name: this.newName, //フォームより入力
+                ip: '', //   未実装。一定時間ごとに取得することで参加者を半リアルタイムに表示させる機能
                 room_id: this.id, //room1を後で何らかの変数に変えればルーム追加できる
                 created_at: '2000-01-01 00:00:00' //作成日時。jsでなくデータベースから取れそう？むしろjsで取得した値はcreated_atに入れられないのでは？？
             };
             this.messages.push(item); //A.push(B) Aの配列の最後にデータBを挿入
             this.newBody = ''; //body入力後、フォーム内を削除。(newItemはフォーム内の文字と動的に結びついている )
-        }
+        },
+        getPost: function getPost() {
+            var _this = this;
+
+            // let self = this;
+            // axios.get('api/postapi/' + this.id)//方法１:失敗
+            //     .then(function (response) {
+            //         self.messages = response;
+            //     });
+            // axios.get('api/postapi/' + this.id , res => {
+            //     this.messages = res.data
+            // })
+            //alert(this.messages);
+            // axios.get('api/postapi/' + this.id)方法２:失敗
+            //     .then(function (response) {
+            //         console.log(response);
+            //     })
+            //     .catch(function (error) {
+            //         console.log(error);
+            //     });
+            axios.get('api/postapi/' + this.id).then(function (response) {
+                console.log(response);
+                _this.messages = response.data;
+                alert(response["data"]); //オブジェクトから値を取り出すには　オブジェクト名[オブジェクト内のデータの名前]　jsの規則にのっとったデータ名(予約語、特殊文字を含まない)なら.でも呼べる
+            });
+        },
+        voidScan: function voidScan() {}
     }
 });
 
@@ -28558,10 +28596,6 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", [_vm._v(_vm._s(fmessage.body))])
               ])
-            : _vm._e(),
-          _vm._v(" "),
-          fmessage === null
-            ? _c("li", [_vm._v("\n            iodhshishivdih\n        ")])
             : _vm._e()
         ])
       }),
