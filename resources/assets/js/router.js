@@ -4,7 +4,7 @@ import Vue from 'vue'
 Vue.use(VueRouter)
 
 export default new VueRouter({
-    mode: 'history',//問題ありそうな場所
+    mode: 'abstract',//問題ありそうな場所
     routes: [
         { path: '/Top', component: require('./components/Top.vue') },
         { path: '/Room', component: require('./components/Room.vue') },

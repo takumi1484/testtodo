@@ -28,4 +28,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('json',  'PostsController');
+Route::resource('json',  'PostsController');//元アドレスにjson/{id}でapi確認ができる
