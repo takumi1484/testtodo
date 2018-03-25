@@ -29,17 +29,18 @@
 <script>
     export default {
         mounted() {
-            console.log('Top.vue mounted.')//vue読み込みの確認
+            console.log('Top.vue mounted.');//vue読み込みの確認
+            this.times = new Date();
             this.getRoom();
         },
         data() {//テストデータ。このデータ形式に合わせてDBからデータを呼び込む
             return {
                 rooms: [{// password: '1qaz',//パスワード　　あとまわし// viewing: '0',//閲覧している人をリアルタイムで  ipアドレスを一定時間ごとに監視すればいけそうだけど後回し
-                    room_id: 'room1',//部屋名
+                    room_id: 'vue_room1',//部屋名
                     created_at: '2000-01-01 00:00:00',
                     allposts: '0'//投稿総数　追記:専用カラム不要
                     },{
-                    room_id: 'room2',//部屋名
+                    room_id: 'vue_room2',//部屋名
                     created_at: '2000-01-01 00:00:00',
                     allposts: '0'//投稿総数
                 },
@@ -48,6 +49,7 @@
                 showAlert: false,
                 alertMessage: '',
                 newRoomName: '',
+                times: '',//強引な時間取得プロパティ
             }
         },
         methods:{
@@ -59,7 +61,7 @@
                 }
                 let newRoom = {                                        //新しい投稿に入れる各種データ
                     room_id: this.newRoomName,                           //フォームより入力
-                    created_at: '2000-01-01 00:00:00',         //作成日時。jsでなくデータベースから取れそう？むしろjsで取得した値はcreated_atに入れられないのでは？？
+                    created_at: 'new post',   //作成日時。jsでなくデータベースから取れそう？むしろjsで取得した値はcreated_atに入れられないのでは？？->this.rooms.pushの処理の前に新たに作ったデータからgetすればうまくできるはず。面倒だからそれっぽくnew postでごまかす
                 };
                 this.rooms.push(newRoom);                         //A.push(B) Aの配列の最後にデータBを挿入
                 this.createRoom();

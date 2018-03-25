@@ -28054,7 +28054,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -28130,24 +28130,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
         console.log('Top.vue mounted.'); //vue読み込みの確認
+        this.times = new Date();
         this.getRoom();
     },
     data: function data() {
         //テストデータ。このデータ形式に合わせてDBからデータを呼び込む
         return {
             rooms: [{ // password: '1qaz',//パスワード　　あとまわし// viewing: '0',//閲覧している人をリアルタイムで  ipアドレスを一定時間ごとに監視すればいけそうだけど後回し
-                room_id: 'room1', //部屋名
+                room_id: 'vue_room1', //部屋名
                 created_at: '2000-01-01 00:00:00',
                 allposts: '0' //投稿総数　追記:専用カラム不要
             }, {
-                room_id: 'room2', //部屋名
+                room_id: 'vue_room2', //部屋名
                 created_at: '2000-01-01 00:00:00',
                 allposts: '0' //投稿総数
             }],
             serchbox: "",
             showAlert: false,
             alertMessage: '',
-            newRoomName: ''
+            newRoomName: '',
+            times: '' //強引な時間取得プロパティ
         };
     },
 
@@ -28160,7 +28162,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
             var newRoom = { //新しい投稿に入れる各種データ
                 room_id: this.newRoomName, //フォームより入力
-                created_at: '2000-01-01 00:00:00' //作成日時。jsでなくデータベースから取れそう？むしろjsで取得した値はcreated_atに入れられないのでは？？
+                created_at: 'new post' //作成日時。jsでなくデータベースから取れそう？むしろjsで取得した値はcreated_atに入れられないのでは？？
             };
             this.rooms.push(newRoom); //A.push(B) Aの配列の最後にデータBを挿入
             this.createRoom();
@@ -28581,15 +28583,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.post('api/postapi/', {
                 body: this.newBody,
                 user_name: this.newName,
-                ip: '0000000', //////////////////////ここが''つまりnullだとエラーだった。httpエラー500
-                room_id: this.id
-                // created_at: '123456789',
-                //ここの要素は配列？オブジェクト？まあどちらかとしてひとまとめにされコントローラへ渡される。コントローラーでは要素を取り出す必要がある
+                ip: '0000000', //////////////////////ここが''つまりnullだとエラーだった。httpエラー500。不要なカラムはエラーを呼びかねない
+                room_id: this.id,
+                created_at: '123456789'
+                //ここの要素は配列？オブジェクト？まあどちらかとしてひとまとめにされコントローラへ渡される。コントローラーでは要素を取り出す必要がある////////////////////////////////////////////////////////
             }).then(function (response) {
                 // this.messages[response.data.id] = response.data;
                 _this2.name = '';
                 _this2.showAlert = false;
-                _this2.alertMessage = ''; //未実装：「送信しました」という通知を表示させる
+                _this2.alertMessage = ''; //未実装：警告部分に「送信しました」という通知を表示させる
             });
         },
         voidScan: function voidScan() {}

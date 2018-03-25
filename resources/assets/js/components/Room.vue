@@ -132,16 +132,16 @@
                 axios.post('api/postapi/' , {
                     body: this.newBody,
                     user_name: this.newName,
-                    ip: '0000000',//////////////////////ここが''つまりnullだとエラーだった。httpエラー500
+                    ip: '0000000',//////////////////////ここが''つまりnullだとエラーだった。httpエラー500。不要なカラムはエラーを呼びかねない
                     room_id: this.id,
-                    // created_at: '123456789',
+                    created_at: '123456789',
                     //ここの要素は配列？オブジェクト？まあどちらかとしてひとまとめにされコントローラへ渡される。コントローラーでは要素を取り出す必要がある////////////////////////////////////////////////////////
                 })
                     .then(response => {
                         // this.messages[response.data.id] = response.data;
                         this.name = '';
                         this.showAlert = false;
-                        this.alertMessage = '';//未実装：「送信しました」という通知を表示させる
+                        this.alertMessage = '';//未実装：警告部分に「送信しました」という通知を表示させる
                     });
             },
             voidScan(){
