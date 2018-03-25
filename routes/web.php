@@ -28,4 +28,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('json',  'PostsController');//元アドレスにjson/{id}でapi確認ができる
+Route::resource('jsonpost',  'PostsController');//元アドレスにjson/{id}でapi確認ができる
+Route::resource('jsonroom',  'RoomsController');

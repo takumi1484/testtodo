@@ -19,41 +19,25 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 - [Robust background job processing](https://laravel.com/docs/queues).
 - [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications.
+##今できていないこと
 
-## Learning Laravel
+- リクエストをhttpsに統一すること。これをしないとherokuに挙げてもhttpリクエスト部分が使えない。現状、データベース全般が使えない
+- 削除処理。今回のテーマ的には不要にも思えたが管理画面を作るなりしてput,deleteも実装するべき。get,postだけでは不十分
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of any modern web application framework, making it a breeze to get started learning the framework.
 
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 1100 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
+##ajax、axios、jquery、非同期通信,,,の意味整理
 
-## Laravel Sponsors
+ajaxはjsのxmlhttprequestを利用した非同期通信の方式
+AJAX=AsynchronousJAvascriptXmlhttprequest(asynchronousは非同期の意)
+機能の名前ではなく手法のようなものの名称であり実態のあるものではない
 
-We would like to extend our thanks to the following sponsors for helping fund on-going Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell):
+jsには何のインポートもライブラリもなしにデフォルト機能としてxmlhttprequestがある。
+これを使えばajax通信は可能。記述は面倒。
+つまりjqueryやaxiosが無くともajax通信することもできる（いわゆる生のjs記述）
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Pulse Storm](http://www.pulsestorm.net/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
+jqueryには$.ajaxというjsにあるxmlhttprequestをとても簡単に使える機能がある
+この機能から$.ajaxを先に知ったせいでajaxを勘違いして使うものだと思っていた。
 
-## Contributing
+axiosは導入方法がjqueryと似ていてurlからの読み込みやnodeでのインストールで使える
+機能に関してはjqueryの$.ajaxとよく似ていてjsにおけるajax通信をとても簡単に扱えるようにしたもの
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

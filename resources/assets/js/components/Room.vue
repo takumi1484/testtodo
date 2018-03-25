@@ -32,6 +32,7 @@
             console.log('Room.vue mounted.');   //vue読み込みの確認
             this.id = location.search;//url取得
             this.id = this.id.slice( 4 );//query(urlの?以降のやつ)から頭4字を消してroom_idに変換
+            this.id = decodeURI(this.id);//urlに日本語は使えず勝手にパーセントエンコーディングされてしまう。ここではパーセントエンコーディングされた文字列をデコードし、正常にルームに入室できるようにしている
             this.showAlert = false;
             this.getPost();
         },
@@ -131,9 +132,10 @@
                 axios.post('api/postapi/' , {
                     body: this.newBody,
                     user_name: this.newName,
-                    ip: '0000000',//ここを''つまりnullだとエラーだった。httpエラー500
+                    ip: '0000000',//////////////////////ここが''つまりnullだとエラーだった。httpエラー500
                     room_id: this.id,
                     // created_at: '123456789',
+                    //ここの要素は配列？オブジェクト？まあどちらかとしてひとまとめにされコントローラへ渡される。コントローラーでは要素を取り出す必要がある////////////////////////////////////////////////////////
                 })
                     .then(response => {
                         // this.messages[response.data.id] = response.data;

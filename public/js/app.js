@@ -28054,7 +28054,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -28130,22 +28130,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
         console.log('Top.vue mounted.'); //vue読み込みの確認
-    },
-
-    methods: {
-        addRoom: function addRoom() {
-            if (this.newRoomName === '') {
-                this.showAlert = true;
-                this.alertMessage = 'ルーム名を入力してください';
-                return false;
-            }
-            var newRoom = { //新しい投稿に入れる各種データ
-                room_id: this.newRoomName, //フォームより入力
-                created_at: '2000-01-01 00:00:00' //作成日時。jsでなくデータベースから取れそう？むしろjsで取得した値はcreated_atに入れられないのでは？？
-            };
-            this.rooms.push(newRoom); //A.push(B) Aの配列の最後にデータBを挿入
-            this.newRoomName = ''; //body入力後、フォーム内を削除。(newItemはフォーム内の文字と動的に結びついている )
-        }
+        this.getRoom();
     },
     data: function data() {
         //テストデータ。このデータ形式に合わせてDBからデータを呼び込む
@@ -28164,6 +28149,41 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             alertMessage: '',
             newRoomName: ''
         };
+    },
+
+    methods: {
+        addRoom: function addRoom() {
+            if (this.newRoomName === '') {
+                this.showAlert = true;
+                this.alertMessage = 'ルーム名を入力してください';
+                return false;
+            }
+            var newRoom = { //新しい投稿に入れる各種データ
+                room_id: this.newRoomName, //フォームより入力
+                created_at: '2000-01-01 00:00:00' //作成日時。jsでなくデータベースから取れそう？むしろjsで取得した値はcreated_atに入れられないのでは？？
+            };
+            this.rooms.push(newRoom); //A.push(B) Aの配列の最後にデータBを挿入
+            this.createRoom();
+        },
+        getRoom: function getRoom() {
+            var _this = this;
+
+            axios.get('api/roomapi/').then(function (response) {
+                console.log(response);
+                _this.rooms = response.data;
+            });
+        },
+        createRoom: function createRoom() {
+            var _this2 = this;
+
+            axios.post('api/roomapi/', {
+                room_id: this.newRoomName
+            }).then(function (response) {
+                _this2.newRoomName = '';
+                _this2.showAlert = false;
+                _this2.alertMessage = ''; //未実装：「作成しました」という通知を表示させる
+            });
+        }
     }
 });
 
@@ -28453,6 +28473,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         console.log('Room.vue mounted.'); //vue読み込みの確認
         this.id = location.search; //url取得
         this.id = this.id.slice(4); //query(urlの?以降のやつ)から頭4字を消してroom_idに変換
+        this.id = decodeURI(this.id); //urlに日本語は使えず勝手にパーセントエンコーディングされてしまう。ここではパーセントエンコーディングされた文字列をデコードし、正常にルームに入室できるようにしている
         this.showAlert = false;
         this.getPost();
     },
@@ -28560,9 +28581,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.post('api/postapi/', {
                 body: this.newBody,
                 user_name: this.newName,
-                ip: '0000000',
+                ip: '0000000', //////////////////////ここが''つまりnullだとエラーだった。httpエラー500
                 room_id: this.id
                 // created_at: '123456789',
+                //ここの要素は配列？オブジェクト？まあどちらかとしてひとまとめにされコントローラへ渡される。コントローラーでは要素を取り出す必要がある
             }).then(function (response) {
                 // this.messages[response.data.id] = response.data;
                 _this2.name = '';

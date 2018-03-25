@@ -30,21 +30,7 @@
     export default {
         mounted() {
             console.log('Top.vue mounted.')//vue読み込みの確認
-        },
-        methods:{
-            addRoom(){
-                if (this.newRoomName === '') {
-                    this.showAlert = true;
-                    this.alertMessage = 'ルーム名を入力してください';
-                    return false;
-                }
-                let newRoom = {                                        //新しい投稿に入れる各種データ
-                    room_id: this.newRoomName,                           //フォームより入力
-                    created_at: '2000-01-01 00:00:00',         //作成日時。jsでなくデータベースから取れそう？むしろjsで取得した値はcreated_atに入れられないのでは？？
-                };
-                this.rooms.push(newRoom);                         //A.push(B) Aの配列の最後にデータBを挿入
-                this.newRoomName = '';                                 //body入力後、フォーム内を削除。(newItemはフォーム内の文字と動的に結びついている )
-            },
+            this.getRoom();
         },
         data() {//テストデータ。このデータ形式に合わせてDBからデータを呼び込む
             return {
@@ -63,6 +49,39 @@
                 alertMessage: '',
                 newRoomName: '',
             }
+        },
+        methods:{
+            addRoom(){
+                if (this.newRoomName === '') {
+                    this.showAlert = true;
+                    this.alertMessage = 'ルーム名を入力してください';
+                    return false;
+                }
+                let newRoom = {                                        //新しい投稿に入れる各種データ
+                    room_id: this.newRoomName,                           //フォームより入力
+                    created_at: '2000-01-01 00:00:00',         //作成日時。jsでなくデータベースから取れそう？むしろjsで取得した値はcreated_atに入れられないのでは？？
+                };
+                this.rooms.push(newRoom);                         //A.push(B) Aの配列の最後にデータBを挿入
+                this.createRoom();
+
+            },
+            getRoom(){
+                axios.get('api/roomapi/')
+                    .then(response => {
+                        console.log(response);
+                        this.rooms = response.data;
+                    });
+            },
+            createRoom(){
+                axios.post('api/roomapi/' , {
+                    room_id: this.newRoomName,
+                })
+                    .then(response => {
+                        this.newRoomName = '';
+                        this.showAlert = false;
+                        this.alertMessage = '';//未実装：「作成しました」という通知を表示させる
+                    });
+            },
         },
     }
 </script>

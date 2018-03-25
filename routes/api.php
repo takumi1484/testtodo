@@ -22,6 +22,7 @@ Route::group(['middleware' => 'api'], function () {
     Route::resource('postapi','PostsController');
 });
 
+Route::group(['middleware' => 'api'], function () {
+    Route::resource('roomapi','RoomsController');
+});
 
-//Route::middleware('api')->get('/postapi',function (){//authに似せて書いただけ。信憑性皆無
-//    Route::resource('/postapi/{id}',  'PostsController');});

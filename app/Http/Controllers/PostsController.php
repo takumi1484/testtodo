@@ -30,7 +30,7 @@ class PostsController extends Controller
 //        return Post::create([
 //            'name' => $user_name['name'],
 //        ]);
-        return Post::create([
+        return Post::create([//requestからそれぞれの値を取り出してデータベースに入れる
             'body' => $request['body'],
             'user_name' => $request['user_name'],
             'ip' => $request['ip'],
