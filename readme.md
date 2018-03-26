@@ -27,6 +27,7 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
     時間で定期的に更新をかけるとリクエスト過多でエラーになるしすごく重くなった。タイピング一つ一つを検知して更新とかが妥当か...？
 - axiosのリクエストをいちいち書くのは正直面倒だった。importしてuri、取得する値を簡略化するほうがよさそう。
 - 自力でリクエスト関連を作り直しても出たhttpとhttpsが混同しているというエラー。herokuにdeployする過程で間違えているかもしれない
+- vu.ejsjという名前でありながらオブジェクトや配列をindexで直接指定できない(spliceで解決)、deleteの挙動が怪しいなど...時にはvueを疑う必要もありそう？
 
 
 ## ajax、axios、jquery、非同期通信,,,
