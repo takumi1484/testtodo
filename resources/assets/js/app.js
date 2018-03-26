@@ -8,6 +8,11 @@ const app = new Vue({
     el: '#app',
     render: h => h(require('./app.vue')),
 })
+// const admin = new Vue({
+//     router,
+//     el: '#admin',
+//     render: h => h(require('./components/Admin.vue')),
+// })
 
 
 // Vue.component('examp', require('./components/ExampleComponent.vue'));

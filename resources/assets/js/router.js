@@ -9,6 +9,7 @@ export default new VueRouter({
         { path: '/Top', component: require('./components/Top.vue') },
         { path: '/Room', component: require('./components/Room.vue') },
         { path: '/', component: require('./components/Top.vue') },
+        { path: '/adadadAdmin' , component:require('./components/Admin.vue')},
     ],
     scrollBehavior (to, from, savedPosition) {
         if (savedPosition) {

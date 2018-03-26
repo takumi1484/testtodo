@@ -45,7 +45,7 @@ class RoomsController extends Controller
 
     public function destroy($id)//削除-delete
     {
-        //
+
     }
 }
 

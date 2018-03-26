@@ -23,10 +23,18 @@ Route::get('/', function () {
     return view('testapp');
 })->where('any', '.*');
 
+Route::get('/Top', function () {
+    return view('testapp');
+})->where('any', '.*');
+
+Route::get('/Room', function () {
+    return view('testapp');
+})->where('any', '.*');
+
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('jsonpost',  'PostsController');//元アドレスにjson/{id}でapi確認ができる
 Route::resource('jsonroom',  'RoomsController');

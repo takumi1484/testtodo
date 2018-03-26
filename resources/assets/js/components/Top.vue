@@ -36,13 +36,13 @@
         data() {//テストデータ。このデータ形式に合わせてDBからデータを呼び込む
             return {
                 rooms: [{// password: '1qaz',//パスワード　　あとまわし// viewing: '0',//閲覧している人をリアルタイムで  ipアドレスを一定時間ごとに監視すればいけそうだけど後回し
-                    room_id: 'vue_room1',//部屋名
-                    created_at: '2000-01-01 00:00:00',
-                    allposts: '0'//投稿総数　追記:専用カラム不要
-                    },{
-                    room_id: 'vue_room2',//部屋名
-                    created_at: '2000-01-01 00:00:00',
-                    allposts: '0'//投稿総数
+                    // room_id: 'vue_room1',//部屋名
+                    // created_at: '2000-01-01 00:00:00',
+                    // allposts: '0'//投稿総数　追記:専用カラム不要
+                    // },{
+                    // room_id: 'vue_room2',//部屋名
+                    // created_at: '2000-01-01 00:00:00',
+                    // allposts: '0'//投稿総数
                 },
                 ],
                 serchbox: "",
