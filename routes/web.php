@@ -31,6 +31,16 @@ Route::get('/Room', function () {
     return view('testapp');
 })->where('any', '.*');
 
+Route::get('/adadadAdmin', function () {
+    return view('testapp');
+})->where('any', '.*');
+
+Route::get('/admin', function () {
+    return view('testapp');
+})->where('any', '.*');
+
+
+
 
 Auth::routes();
 

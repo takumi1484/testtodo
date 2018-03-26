@@ -71,7 +71,7 @@
 
 
 var bind = __webpack_require__(11);
-var isBuffer = __webpack_require__(43);
+var isBuffer = __webpack_require__(48);
 
 /*global toString:true*/
 
@@ -827,7 +827,7 @@ module.exports = function normalizeComponent (
 /* WEBPACK VAR INJECTION */(function(process) {
 
 var utils = __webpack_require__(0);
-var normalizeHeaderName = __webpack_require__(45);
+var normalizeHeaderName = __webpack_require__(50);
 
 var DEFAULT_CONTENT_TYPE = {
   'Content-Type': 'application/x-www-form-urlencoded'
@@ -24824,12 +24824,12 @@ module.exports = function bind(fn, thisArg) {
 
 
 var utils = __webpack_require__(0);
-var settle = __webpack_require__(46);
-var buildURL = __webpack_require__(48);
-var parseHeaders = __webpack_require__(49);
-var isURLSameOrigin = __webpack_require__(50);
+var settle = __webpack_require__(51);
+var buildURL = __webpack_require__(53);
+var parseHeaders = __webpack_require__(54);
+var isURLSameOrigin = __webpack_require__(55);
 var createError = __webpack_require__(13);
-var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(51);
+var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(56);
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -24926,7 +24926,7 @@ module.exports = function xhrAdapter(config) {
     // This is only done if running in a standard browser environment.
     // Specifically not if we're in a web worker, or react-native.
     if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(52);
+      var cookies = __webpack_require__(57);
 
       // Add xsrf header
       var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -25010,7 +25010,7 @@ module.exports = function xhrAdapter(config) {
 "use strict";
 
 
-var enhanceError = __webpack_require__(47);
+var enhanceError = __webpack_require__(52);
 
 /**
  * Create an Error with the specified message, config, error code, request and response.
@@ -25071,7 +25071,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(17);
-module.exports = __webpack_require__(65);
+module.exports = __webpack_require__(70);
 
 
 /***/ }),
@@ -25086,13 +25086,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-__webpack_require__(37);
+__webpack_require__(42);
 
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     router: __WEBPACK_IMPORTED_MODULE_1__router__["a" /* default */],
     el: '#app',
     render: function render(h) {
-        return h(__webpack_require__(60));
+        return h(__webpack_require__(65));
     }
 });
 // const admin = new Vue({
@@ -25385,7 +25385,7 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_0_vue_
 
 /* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
     mode: 'history', //問題ありそうな場所
-    routes: [{ path: '/Top', component: __webpack_require__(8) }, { path: '/Room', component: __webpack_require__(27) }, { path: '/', component: __webpack_require__(8) }, { path: '/adadadAdmin', component: __webpack_require__(32) }],
+    routes: [{ path: '/Top', component: __webpack_require__(8) }, { path: '/Room', component: __webpack_require__(27) }, { path: '/', component: __webpack_require__(8) }, { path: '/adadadAdmin', component: __webpack_require__(32) }, { path: '/admin', component: __webpack_require__(37) }],
     scrollBehavior: function scrollBehavior(to, from, savedPosition) {
         if (savedPosition) {
             return savedPosition;
@@ -28168,7 +28168,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
             var newRoom = { //新しい投稿に入れる各種データ
                 room_id: this.newRoomName, //フォームより入力
-                created_at: 'new post' //作成日時。jsでなくデータベースから取れそう？むしろjsで取得した値はcreated_atに入れられないのでは？？->this.rooms.pushの処理の前に新たに作ったデータからgetすればうまくできるはず。面倒だからそれっぽくnew postでごまかす
+                created_at: 'new ' //作成日時。jsでなくデータベースから取れそう？むしろjsで取得した値はcreated_atに入れられないのでは？？->this.rooms.pushの処理の前に新たに作ったデータからgetすればうまくできるはず。面倒だからそれっぽくnew postでごまかす
             };
             this.rooms.push(newRoom); //A.push(B) Aの配列の最後にデータBを挿入
             this.createRoom();
@@ -28206,30 +28206,6 @@ var render = function() {
   return _c(
     "div",
     [
-      _vm._l(_vm.rooms, function(froom) {
-        return _c("ul", [
-          _c(
-            "li",
-            [
-              _c(
-                "router-link",
-                {
-                  attrs: { to: { path: "Room", query: { id: froom.room_id } } }
-                },
-                [_vm._v(_vm._s(froom.room_id))]
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c("div", [_vm._v(_vm._s(froom.allposts))]),
-          _vm._v(" "),
-          _c("div", [_vm._v(_vm._s(froom.created_at))])
-        ])
-      }),
-      _vm._v(" "),
-      _c("hr"),
-      _vm._v(" "),
       _c("div", [_vm._v("room serch")]),
       _vm._v(" "),
       _c("input", {
@@ -28334,7 +28310,31 @@ var render = function() {
               )
             : _vm._e()
         ]
-      )
+      ),
+      _vm._v(" "),
+      _c("hr"),
+      _vm._v(" "),
+      _vm._l(_vm.rooms, function(froom) {
+        return _c("ul", [
+          _c(
+            "li",
+            [
+              _c(
+                "router-link",
+                {
+                  attrs: { to: { path: "Room", query: { id: froom.room_id } } }
+                },
+                [_vm._v(_vm._s(froom.room_id))]
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("div", [_vm._v(_vm._s(froom.allposts))]),
+          _vm._v(" "),
+          _c("div", [_vm._v(_vm._s(froom.created_at))])
+        ])
+      })
     ],
     2
   )
@@ -28435,7 +28435,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.footer[data-v-60a2ed5c]{\n    position: fixed;\n    bottom: 0;\n    width: 100%;\n    height: 150px;\n    background: #bdc0c0;\n    padding-left: 2%;\n    padding-right: 2%;\n    padding-top: 10px;\n}\n.text-inline[data-v-60a2ed5c]{\n    margin-top: 4px;\n    margin-bottom: 4px;\n}\n#body[data-v-60a2ed5c]{\n    padding-bottom: 150px;\n}\n", ""]);
+exports.push([module.i, "\n.footer[data-v-60a2ed5c]{\n    position: fixed;\n    bottom: 0;\n    width: 100%;\n    height: 150px;\n    background: #bdc0c0;\n    padding-left: 2%;\n    padding-right: 2%;\n    padding-top: 10px;\n}\n.text-inline[data-v-60a2ed5c]{\n    position: fixed;\n    right: 10px;\n}\n#body[data-v-60a2ed5c]{\n    padding-bottom: 150px;\n}\n", ""]);
 
 // exports
 
@@ -28446,6 +28446,7 @@ exports.push([module.i, "\n.footer[data-v-60a2ed5c]{\n    position: fixed;\n    
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -28557,7 +28558,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 user_name: this.newName, //フォームより入力
                 ip: '', //   未実装。一定時間ごとに取得することで参加者を半リアルタイムに表示させる機能
                 room_id: this.id, //room1を後で何らかの変数に変えればルーム追加できる
-                created_at: '2000-01-01 00:00:00' //作成日時。jsでなくデータベースから取れそう？むしろjsで取得した値はcreated_atに入れられないのでは？？
+                created_at: 'new post' //作成日時。jsでなくデータベースから取れそう？むしろjsで取得した値はcreated_atに入れられないのでは？？
             };
             this.sendPost();
             this.messages.push(item); //A.push(B) Aの配列の最後にデータBを挿入
@@ -28577,6 +28578,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             //alert(this.messages);
 
             axios.get('api/postapi/' + this.id) //無事に取得できた。jsのオブジェクトに関する知識不足でうまくデータが取り出せなかった。オブジェクトから値を取り出すには　オブジェクト名[オブジェクト内のデータの名前]　jsの規則にのっとったデータ名(予約語、特殊文字を含まない)なら.でも呼べる
+            //メモ：urlからルームを直接指定できる代わりに同じルーム名にすると古いルームの内容が反映される。まああげってことで放置でいい。本当なら無二のidでルームはわける
             .then(function (response) {
                 console.log(response); //consoleによる出力はchromeの検証などから確認できる
                 _this.messages = response.data;
@@ -28590,14 +28592,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 body: this.newBody,
                 user_name: this.newName,
                 ip: '0000000', //////////////////////ここが''つまりnullだとエラーだった。httpエラー500。不要なカラムはエラーを呼びかねない
-                room_id: this.id,
-                created_at: '123456789'
+                room_id: this.id
                 //ここの要素は配列？オブジェクト？まあどちらかとしてひとまとめにされコントローラへ渡される。コントローラーでは要素を取り出す必要がある////////////////////////////////////////////////////////
             }).then(function (response) {
                 // this.messages[response.data.id] = response.data;
                 _this2.name = '';
                 _this2.showAlert = false;
                 _this2.alertMessage = ''; //未実装：警告部分に「送信しました」という通知を表示させる
+                _this2.created_at = 'new post';
             });
         },
         voidScan: function voidScan() {}
@@ -28826,7 +28828,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.box0[data-v-69afa6e8]{\n    width: 100%;\n    border-collapse: collapse;\n}\n.box0 th[data-v-69afa6e8]{\n    width: 17%;\n    padding: 6px;\n    text-align: left;\n    vertical-align: top;\n    color: #333;\n    background-color: #eee;\n    border: 1px solid #b9b9b9;\n}\n.box0 td[data-v-69afa6e8]{\n    padding: 6px;\n    background-color: #fff;\n    border: 1px solid #b9b9b9;\n}\n.box1[data-v-69afa6e8]{\n    width: 100%;\n    border-collapse: collapse;\n}\n.box1 th[data-v-69afa6e8]{\n    width: 25%;\n    padding: 6px;\n    text-align: left;\n    vertical-align: top;\n    color: #333;\n    background-color: #eee;\n    border: 1px solid #b9b9b9;\n}\n.box1 td[data-v-69afa6e8]{\n    padding: 6px;\n    background-color: #fff;\n    border: 1px solid #b9b9b9;\n}\n", ""]);
 
 // exports
 
@@ -28841,13 +28843,334 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    name: "admin"
+    mounted: function mounted() {
+        this.get();
+    },
+    data: function data() {
+        return {
+            messages: [],
+            rooms: []
+        };
+    },
+
+    methods: {
+        get: function get() {
+            var _this = this;
+
+            axios.get('api/postapi/').then(function (response) {
+                console.log(response);
+                _this.messages = response.data;
+            });
+            axios.get('api/roomapi/').then(function (response) {
+                console.log(response);
+                _this.rooms = response.data;
+            });
+        },
+        deletePost: function deletePost(fmes) {
+            var _this2 = this;
+
+            //単なる"delete"はmethodsでも@clickでも予約語だったらしくエラーが出た
+            axios.delete('api/postapi/' + fmes.id).then(function (res) {
+                // this.messages.splice(fmes.id-1 ,1)
+                // alert(fmes.id)
+                _this2.$forceUpdate(); //jsの機能？
+            });
+            this.get();
+            // this.messages.splice(fmessages.id ,1)
+            // alert(fmessages.id)
+            // delete fmessages.id;
+            // delete this.messages[fmessages.id];
+            this.$forceUpdate();
+        }
+    }
 });
 
 /***/ }),
 /* 36 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _vm._v("\n    admin\n    "),
+    _c("hr"),
+    _vm._v(" "),
+    _c("table", { staticClass: "box0" }, [
+      _c(
+        "tbody",
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _vm._l(_vm.messages, function(fmessages) {
+            return _c("tr", [
+              _c("td", [_vm._v(_vm._s(fmessages.id))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(fmessages.room_id))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(fmessages.user_name))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(fmessages.body))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(fmessages.created_at))]),
+              _vm._v(" "),
+              _c("td", [
+                _c("button", [_vm._v("che")]),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    on: {
+                      click: function($event) {
+                        _vm.deletePost(fmessages)
+                      }
+                    }
+                  },
+                  [_vm._v("el")]
+                )
+              ])
+            ])
+          })
+        ],
+        2
+      )
+    ]),
+    _vm._v(" "),
+    _c("table", { staticClass: "box1" }, [
+      _c(
+        "tbody",
+        [
+          _vm._m(1),
+          _vm._v(" "),
+          _vm._l(_vm.rooms, function(frooms) {
+            return _c("tr", [
+              _c("td", [_vm._v(_vm._s(frooms.id))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(frooms.room_id))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(frooms.created_at))]),
+              _vm._v(" "),
+              _c("td", [
+                _c("button", [_vm._v("che")]),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    on: {
+                      click: function($event) {
+                        _vm.deleteRoom(frooms)
+                      }
+                    }
+                  },
+                  [_vm._v("el")]
+                )
+              ])
+            ])
+          })
+        ],
+        2
+      )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", [_vm._v("id")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("user_name")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("room_id")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("body")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("created_at")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("change")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", [_vm._v("id")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("room_id")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("created_at")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("change")])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-69afa6e8", module.exports)
+  }
+}
+
+/***/ }),
+/* 37 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(38)
+}
+var normalizeComponent = __webpack_require__(4)
+/* script */
+var __vue_script__ = __webpack_require__(40)
+/* template */
+var __vue_template__ = __webpack_require__(41)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-362bdc40"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\damy.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-362bdc40", Component.options)
+  } else {
+    hotAPI.reload("data-v-362bdc40", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 38 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(39);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(3)("d8d5c9a0", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-362bdc40\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./damy.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-362bdc40\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./damy.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 39 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(2)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 40 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    mounted: function mounted() {
+        location.href = "http://www.google.com/teapot";
+    }
+});
+
+/***/ }),
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -28862,16 +29185,16 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-69afa6e8", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-362bdc40", module.exports)
   }
 }
 
 /***/ }),
-/* 37 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-window._ = __webpack_require__(38);
+window._ = __webpack_require__(43);
 window.Popper = __webpack_require__(9).default;
 
 /**
@@ -28883,7 +29206,7 @@ window.Popper = __webpack_require__(9).default;
 try {
   window.$ = window.jQuery = __webpack_require__(10);
 
-  __webpack_require__(40);
+  __webpack_require__(45);
 } catch (e) {}
 
 /**
@@ -28892,7 +29215,7 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = __webpack_require__(41);
+window.axios = __webpack_require__(46);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -28928,7 +29251,7 @@ if (token) {
 // });
 
 /***/ }),
-/* 38 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -46030,10 +46353,10 @@ if (token) {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(39)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(44)(module)))
 
 /***/ }),
-/* 39 */
+/* 44 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -46061,7 +46384,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 40 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
@@ -49961,13 +50284,13 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 
 /***/ }),
-/* 41 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(42);
+module.exports = __webpack_require__(47);
 
 /***/ }),
-/* 42 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -49975,7 +50298,7 @@ module.exports = __webpack_require__(42);
 
 var utils = __webpack_require__(0);
 var bind = __webpack_require__(11);
-var Axios = __webpack_require__(44);
+var Axios = __webpack_require__(49);
 var defaults = __webpack_require__(5);
 
 /**
@@ -50010,14 +50333,14 @@ axios.create = function create(instanceConfig) {
 
 // Expose Cancel & CancelToken
 axios.Cancel = __webpack_require__(15);
-axios.CancelToken = __webpack_require__(58);
+axios.CancelToken = __webpack_require__(63);
 axios.isCancel = __webpack_require__(14);
 
 // Expose all/spread
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-axios.spread = __webpack_require__(59);
+axios.spread = __webpack_require__(64);
 
 module.exports = axios;
 
@@ -50026,7 +50349,7 @@ module.exports.default = axios;
 
 
 /***/ }),
-/* 43 */
+/* 48 */
 /***/ (function(module, exports) {
 
 /*!
@@ -50053,7 +50376,7 @@ function isSlowBuffer (obj) {
 
 
 /***/ }),
-/* 44 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50061,8 +50384,8 @@ function isSlowBuffer (obj) {
 
 var defaults = __webpack_require__(5);
 var utils = __webpack_require__(0);
-var InterceptorManager = __webpack_require__(53);
-var dispatchRequest = __webpack_require__(54);
+var InterceptorManager = __webpack_require__(58);
+var dispatchRequest = __webpack_require__(59);
 
 /**
  * Create a new instance of Axios
@@ -50139,7 +50462,7 @@ module.exports = Axios;
 
 
 /***/ }),
-/* 45 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50158,7 +50481,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 
 /***/ }),
-/* 46 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50191,7 +50514,7 @@ module.exports = function settle(resolve, reject, response) {
 
 
 /***/ }),
-/* 47 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50219,7 +50542,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
 
 
 /***/ }),
-/* 48 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50292,7 +50615,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 
 /***/ }),
-/* 49 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50352,7 +50675,7 @@ module.exports = function parseHeaders(headers) {
 
 
 /***/ }),
-/* 50 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50427,7 +50750,7 @@ module.exports = (
 
 
 /***/ }),
-/* 51 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50470,7 +50793,7 @@ module.exports = btoa;
 
 
 /***/ }),
-/* 52 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50530,7 +50853,7 @@ module.exports = (
 
 
 /***/ }),
-/* 53 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50589,18 +50912,18 @@ module.exports = InterceptorManager;
 
 
 /***/ }),
-/* 54 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(0);
-var transformData = __webpack_require__(55);
+var transformData = __webpack_require__(60);
 var isCancel = __webpack_require__(14);
 var defaults = __webpack_require__(5);
-var isAbsoluteURL = __webpack_require__(56);
-var combineURLs = __webpack_require__(57);
+var isAbsoluteURL = __webpack_require__(61);
+var combineURLs = __webpack_require__(62);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -50682,7 +51005,7 @@ module.exports = function dispatchRequest(config) {
 
 
 /***/ }),
-/* 55 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50709,7 +51032,7 @@ module.exports = function transformData(data, headers, fns) {
 
 
 /***/ }),
-/* 56 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50730,7 +51053,7 @@ module.exports = function isAbsoluteURL(url) {
 
 
 /***/ }),
-/* 57 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50751,7 +51074,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 
 /***/ }),
-/* 58 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50815,7 +51138,7 @@ module.exports = CancelToken;
 
 
 /***/ }),
-/* 59 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50849,19 +51172,19 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 60 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(61)
+  __webpack_require__(66)
 }
 var normalizeComponent = __webpack_require__(4)
 /* script */
-var __vue_script__ = __webpack_require__(63)
+var __vue_script__ = __webpack_require__(68)
 /* template */
-var __vue_template__ = __webpack_require__(64)
+var __vue_template__ = __webpack_require__(69)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -50900,13 +51223,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 61 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(62);
+var content = __webpack_require__(67);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -50926,7 +51249,7 @@ if(false) {
 }
 
 /***/ }),
-/* 62 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)(false);
@@ -50940,7 +51263,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 
 /***/ }),
-/* 63 */
+/* 68 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -50961,7 +51284,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 64 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -50983,7 +51306,7 @@ if (false) {
 }
 
 /***/ }),
-/* 65 */
+/* 70 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

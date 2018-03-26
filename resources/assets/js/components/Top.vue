@@ -1,11 +1,5 @@
 <template>
     <div>
-        <ul v-for="froom in rooms"><!--v-for:繰り返し処理による投稿の全表示-->
-            <li><router-link :to="{ path: 'Room', query: { id: froom.room_id }}">{{ froom.room_id }}</router-link></li><!--リンク先ページのurlにqueryを付与-->
-                <div>{{ froom.allposts }}</div>
-                <div>{{ froom.created_at }}</div>
-        </ul>
-        <hr>
         <div>room serch</div><!--フッターかヘッダーにいれたほうがよさそう-->
         <input type="text" class="form-control" v-model="serchbox" placeholder="ルームを検索...">
         <ul v-for="froom in rooms">
@@ -23,6 +17,12 @@
                 {{ alertMessage }}
             </div>
         </form>
+        <hr>
+        <ul v-for="froom in rooms"><!--v-for:繰り返し処理による投稿の全表示-->
+            <li><router-link :to="{ path: 'Room', query: { id: froom.room_id }}">{{ froom.room_id }}</router-link></li><!--リンク先ページのurlにqueryを付与-->
+            <div>{{ froom.allposts }}</div>
+            <div>{{ froom.created_at }}</div>
+        </ul>
     </div>
 </template>
 
@@ -61,7 +61,7 @@
                 }
                 let newRoom = {                                        //新しい投稿に入れる各種データ
                     room_id: this.newRoomName,                           //フォームより入力
-                    created_at: 'new post',   //作成日時。jsでなくデータベースから取れそう？むしろjsで取得した値はcreated_atに入れられないのでは？？->this.rooms.pushの処理の前に新たに作ったデータからgetすればうまくできるはず。面倒だからそれっぽくnew postでごまかす
+                    created_at: 'new ',   //作成日時。jsでなくデータベースから取れそう？むしろjsで取得した値はcreated_atに入れられないのでは？？->this.rooms.pushの処理の前に新たに作ったデータからgetすればうまくできるはず。面倒だからそれっぽくnew postでごまかす
                 };
                 this.rooms.push(newRoom);                         //A.push(B) Aの配列の最後にデータBを挿入
                 this.createRoom();

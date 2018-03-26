@@ -19,11 +19,13 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 - [Robust background job processing](https://laravel.com/docs/queues).
 - [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-## 今できていないこと
+## 今できていないこと,思たこと
 
 - リクエストをhttpsに統一すること。これをしないとherokuに挙げてもhttpリクエスト部分が使えない。現状、データベース全般が使えない
 - 削除処理。今回のテーマ的には不要にも思えたが管理画面を作るなりしてput,deleteも実装するべき。get,postだけでは不十分
-
+- データベース内のデータ変更を検知してjsを発火させたい。そうしないととても会話ができるとは思えない。
+    時間で定期的に更新をかけるとリクエスト過多でエラーになるしすごく重くなった。タイピング一つ一つを検知して更新とかが妥当か...？
+- axiosのリクエストをいちいち書くのは正直面倒だった。importしてuri、取得する値簡を略化するほうがよさそう。
 
 ## ajax、axios、jquery、非同期通信,,,の意味整理
 

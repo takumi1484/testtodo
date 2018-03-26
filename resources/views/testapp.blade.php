@@ -1,3 +1,4 @@
+{{--urlのTopの部分を消してadminとすると管理画面にいける--}}
 <!DOCTYPE html>
 <html lang="{{ config('app.locale') }}"><!--config/app.php内,81行目のlocalを利用。変更していない場合は'en'-->
 <head>

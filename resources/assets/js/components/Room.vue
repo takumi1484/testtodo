@@ -8,6 +8,7 @@
                 追記２そもそもデータベース"すべて"呼び込んでからifで分けるのは非効率的すぎる。laravelのmiddlewareかcontrollerでwhereしたほうが良い。その場合、queryからルーム判別する方式は変える必要がありそう
                 追記３queryデータを利用して取得データを制限することができるかもしれない
                 追記４apiでのuri指定でidを利用することによりaxiosで受け取るデータを制限できた。v-ifのくだりはもう不要
+                よく見たらここで　オブジェクト名.内部データ名　で取り出しがうまくいってる
                 -->
                 <hr>
                 <div>{{ fmessage.user_name }}　　{{ fmessage.created_at }}</div>
@@ -104,7 +105,7 @@
                     user_name: this.newName,                     //フォームより入力
                     ip: '',//   未実装。一定時間ごとに取得することで参加者を半リアルタイムに表示させる機能
                     room_id: this.id,                             //room1を後で何らかの変数に変えればルーム追加できる
-                    created_at: '2000-01-01 00:00:00',         //作成日時。jsでなくデータベースから取れそう？むしろjsで取得した値はcreated_atに入れられないのでは？？
+                    created_at: 'new post',         //作成日時。jsでなくデータベースから取れそう？むしろjsで取得した値はcreated_atに入れられないのでは？？
                     };
                 this.sendPost();
                 this.messages.push(item);                         //A.push(B) Aの配列の最後にデータBを挿入
@@ -122,6 +123,7 @@
                 //alert(this.messages);
 
                 axios.get('api/postapi/' + this.id)//無事に取得できた。jsのオブジェクトに関する知識不足でうまくデータが取り出せなかった。オブジェクトから値を取り出すには　オブジェクト名[オブジェクト内のデータの名前]　jsの規則にのっとったデータ名(予約語、特殊文字を含まない)なら.でも呼べる
+                    //メモ：urlからルームを直接指定できる代わりに同じルーム名にすると古いルームの内容が反映される。まああげってことで放置でいい。本当なら無二のidでルームはわける
                     .then(response => {
                         console.log(response);//consoleによる出力はchromeの検証などから確認できる
                         this.messages = response.data;
@@ -134,7 +136,6 @@
                     user_name: this.newName,
                     ip: '0000000',//////////////////////ここが''つまりnullだとエラーだった。httpエラー500。不要なカラムはエラーを呼びかねない
                     room_id: this.id,
-                    created_at: '123456789',
                     //ここの要素は配列？オブジェクト？まあどちらかとしてひとまとめにされコントローラへ渡される。コントローラーでは要素を取り出す必要がある////////////////////////////////////////////////////////
                 })
                     .then(response => {
@@ -142,6 +143,7 @@
                         this.name = '';
                         this.showAlert = false;
                         this.alertMessage = '';//未実装：警告部分に「送信しました」という通知を表示させる
+                        this.created_at ='new post';
                     });
             },
             voidScan(){
@@ -163,8 +165,8 @@
         padding-top: 10px;
     }
     .text-inline{
-        margin-top: 4px;
-        margin-bottom: 4px;
+        position: fixed;
+        right: 10px;
     }
     #body{
         padding-bottom: 150px;
