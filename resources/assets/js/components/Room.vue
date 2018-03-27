@@ -31,6 +31,10 @@
     export default {
         mounted() {//このvueコンポーネントがマウント(読み込み)された時に一度読み込まれる
             console.log('Room.vue mounted.');   //vue読み込みの確認
+
+            window.axios = require('axios');
+            window.axios.default.baseURL = 'https://kuhblume.herokuapp.com/';
+            
             this.id = location.search;//url取得
             this.id = this.id.slice( 4 );//query(urlの?以降のやつ)から頭4字を消してroom_idに変換
             this.id = decodeURI(this.id);//urlに日本語は使えず勝手にパーセントエンコーディングされてしまう。ここではパーセントエンコーディングされた文字列をデコードし、正常にルームに入室できるようにしている
