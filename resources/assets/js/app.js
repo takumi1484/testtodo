@@ -5,6 +5,9 @@ import router from './router'
 
 axios.defaults.baseURL = 'https://kuhblume.herokuapp.com';
 axios.defaults.xsrfHeaderName =  'X-CSRF-Token';
+axios.defaults.headers.common = {
+    'X-Requested-With': 'XMLHttpRequest'
+};
 
 require('./bootstrap');
 
