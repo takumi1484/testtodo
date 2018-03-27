@@ -32,6 +32,7 @@
             console.log('Top.vue mounted.');//vue読み込みの確認
 
             axios.defaults.baseURL = 'https://kuhblume.herokuapp.com/';
+            axios.defaults.xsrfHeaderName =  'X-CSRF-Token';
 
             this.times = new Date();
             this.getRoom();

@@ -48,7 +48,8 @@
     export default {
         mounted(){
 
-            axios.defaults.baseURL = 'https://kuhblume.herokuapp.com/';
+            axios.defaults.baseURL = 'https://kuhblume.herokuapp.com';
+            axios.defaults.xsrfHeaderName =  'X-CSRF-Token';
 
             this.get();
         },

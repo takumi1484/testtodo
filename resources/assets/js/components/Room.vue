@@ -33,6 +33,7 @@
             console.log('Room.vue mounted.');   //vue読み込みの確認
 
             axios.defaults.baseURL = 'https://kuhblume.herokuapp.com/';
+            axios.defaults.xsrfHeaderName =  'X-CSRF-Token';
 
             this.id = location.search;//url取得
             this.id = this.id.slice( 4 );//query(urlの?以降のやつ)から頭4字を消してroom_idに変換

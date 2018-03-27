@@ -1,6 +1,11 @@
 import Vue from 'vue'
 import router from './router'
 
+
+
+axios.defaults.baseURL = 'https://kuhblume.herokuapp.com';
+axios.defaults.xsrfHeaderName =  'X-CSRF-Token';
+
 require('./bootstrap');
 
 const app = new Vue({
@@ -22,4 +27,6 @@ const app = new Vue({
 //         etext: 'TESTMESSAGE',//呼び出せてない
 //     }
 // });
+
+
 
