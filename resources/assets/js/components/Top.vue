@@ -75,8 +75,16 @@
 
             },
             getRoom(){
-                axios.get('api/roomapi/')
-                    .then(response => {
+                // axios.get('api/roomapi/')
+                //     .then(response => {
+                //         console.log(response);
+                //         this.rooms = response.data;
+                //     });
+                axios({
+                    method:'get',
+                    url:'https://kuhblume.herokuapp.com/',
+                })
+                    .then(function(response) {
                         console.log(response);
                         this.rooms = response.data;
                     });
