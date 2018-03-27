@@ -30,8 +30,8 @@
     export default {
         mounted() {
             console.log('Top.vue mounted.');//vue読み込みの確認
-            window.axios = require('axios');
-            window.axios.default.baseURL = 'https://kuhblume.herokuapp.com/';
+
+            axios.defaults.baseURL = 'https://kuhblume.herokuapp.com/';
 
             this.times = new Date();
             this.getRoom();

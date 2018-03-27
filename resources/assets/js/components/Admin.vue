@@ -47,9 +47,8 @@
 <script>
     export default {
         mounted(){
-            window.axios = require('axios');
-            window.axios.default.baseURL = 'https://kuhblume.herokuapp.com/';
 
+            axios.defaults.baseURL = 'https://kuhblume.herokuapp.com/';
 
             this.get();
         },
