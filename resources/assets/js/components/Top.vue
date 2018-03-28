@@ -74,7 +74,7 @@
 
             },
             getRoom(){
-                axios.get('jsonroom/')
+                axios.get('api/roomapi/')
                     .then(response => {
                         console.log(response);
                         this.rooms = response.data;
@@ -89,7 +89,7 @@
                 //     });
             },
             createRoom(){
-                axios.post('jsonroom/' , {
+                axios.post('api/postapi/' , {
                     room_id: this.newRoomName,
                 })
                     .then(response => {
