@@ -82,11 +82,11 @@
                 // axios({
                 //     method:'get',
                 //     url:'https://kuhblume.herokuapp.com/',
-                // })
-                    .then(function(response) {
-                        console.log(response);
-                        this.rooms = response.data;
-                    });
+                //  })
+                //     .then(function(response) {
+                //         console.log(response);
+                //         this.rooms = response.data;
+                //     });
             },
             createRoom(){
                 axios.post('api/roomapi/' , {
