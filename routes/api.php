@@ -26,3 +26,5 @@ Route::group(['middleware' => 'api'], function () {
     Route::resource('roomapi','RoomsController');
 });
 
+Route::resource('jsonpost',  'PostsController');//元アドレスにjson/{id}でapi確認ができる
+Route::resource('jsonroom',  'RoomsController');
