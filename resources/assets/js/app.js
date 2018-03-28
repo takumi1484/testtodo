@@ -2,11 +2,11 @@ import Vue from 'vue'
 import router from './router'
 // import axios from 'axios';
 
-axios.defaults.baseURL = 'https://kuhblume.herokuapp.com';
-axios.defaults.xsrfHeaderName =  'X-CSRF-Token';
-axios.defaults.headers.common = {
-    'X-Requested-With': 'XMLHttpRequest'
-};
+// axios.defaults.baseURL = 'https://kuhblume.herokuapp.com';
+// axios.defaults.xsrfHeaderName =  'X-CSRF-Token';
+// axios.defaults.headers.common = {
+//     'X-Requested-With': 'XMLHttpRequest'
+// };
 
 require('./bootstrap');
 
