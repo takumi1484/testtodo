@@ -28197,7 +28197,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         getRoom: function getRoom() {
             var _this = this;
 
-            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('jsonroom/').then(function (response) {
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('api/roomapi/').then(function (response) {
                 console.log(response);
                 _this.rooms = response.data;
             });
@@ -28213,7 +28213,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         createRoom: function createRoom() {
             var _this2 = this;
 
-            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('jsonroom/', {
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('api/postapi/', {
                 room_id: this.newRoomName
             }).then(function (response) {
                 _this2.newRoomName = '';
