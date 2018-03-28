@@ -40,7 +40,6 @@
             </tr>
             </tbody>
         </table>
-
     </div>
 </template>
 
@@ -53,7 +52,6 @@
             axios.defaults.headers.common = {
                 'X-Requested-With': 'XMLHttpRequest'
             };
-
             this.get();
         },
         data(){
@@ -92,7 +90,6 @@
         }
     }
 </script>
-
 <style scoped>
     .box0{
         width: 100%;

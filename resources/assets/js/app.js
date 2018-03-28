@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import router from './router'
-import axios from 'axios';
+// import axios from 'axios';
 
 axios.defaults.baseURL = 'https://kuhblume.herokuapp.com';
 axios.defaults.xsrfHeaderName =  'X-CSRF-Token';
@@ -20,8 +20,6 @@ const app = new Vue({
 //     el: '#admin',
 //     render: h => h(require('./components/Admin.vue')),
 // })
-
-
 // Vue.component('examp', require('./components/ExampleComponent.vue'));
 // const exam = new Vue({
 //     el: '#exam',
