@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import router from './router'
-
-
+import axios from 'axios';
 
 axios.defaults.baseURL = 'https://kuhblume.herokuapp.com';
 axios.defaults.xsrfHeaderName =  'X-CSRF-Token';

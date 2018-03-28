@@ -5,7 +5,7 @@
         <ul v-for="froom in rooms">
             <div v-if="froom.room_id === serchbox">
             <li><router-link :to="{ path: 'Room', query: { id: froom.room_id }}">{{ froom.room_id }}</router-link></li>
-                <div>{{ froom.allposts }}</div>
+                <div>{{ froom.allposts }}</div>         <!--全ルームの投稿を取得しlength化して全ポスト数を表示-->
                 <div>{{ froom.created_at }}</div>
             </div>
         </ul>
