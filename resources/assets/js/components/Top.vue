@@ -36,7 +36,6 @@
             axios.defaults.headers.common = {
                 'X-Requested-With': 'XMLHttpRequest'
             };
-
             this.times = new Date();
             this.getRoom();
         },
