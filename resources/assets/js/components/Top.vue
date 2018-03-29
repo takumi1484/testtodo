@@ -80,7 +80,7 @@
 
             },
             getRoom(){
-                axios.get('api/roomapi/')
+                axios.get('https://kuhblume.herokuapp.com/api/roomapi/')
                     .then(response => {
                         console.log(response);
                         this.rooms = response.data;
@@ -95,7 +95,7 @@
                 //     });
             },
             createRoom(){
-                axios.post('api/postapi/' , {
+                axios.post('https://kuhblume.herokuapp.com/api/postapi/' , {
                     room_id: this.newRoomName,
                 })
                     .then(response => {
