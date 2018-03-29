@@ -32,6 +32,8 @@
         mounted() {
             console.log('Top.vue mounted.');//vue読み込みの確認
             axios.defaults.baseURL = 'https://kuhblume.herokuapp.com/';
+            axios.defaults.headers['X-CSRF-TOKEN']     = window.Laravel.csrfToken
+            axios.defaults.headers['X-Requested-With'] = 'XMLHttpRequest'
             // axios.defaults.xsrfHeaderName =  'X-CSRF-Token';
             // axios.defaults.headers.common = {
             //     'X-Requested-With': 'XMLHttpRequest'
@@ -60,7 +62,6 @@
                 showAlert: false,
                 alertMessage: '',
                 newRoomName: '',
-                times: '',//強引な時間取得プロパティ
             }
         },
         methods:{
