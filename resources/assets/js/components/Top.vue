@@ -31,18 +31,18 @@
     export default {
         mounted() {
             console.log('Top.vue mounted.');//vue読み込みの確認
-            axios.defaults.baseURL = 'https://kuhblume.herokuapp.com/';
-            axios.defaults.headers['X-CSRF-TOKEN']     = window.Laravel.csrfToken
-            axios.defaults.headers['X-Requested-With'] = 'XMLHttpRequest'
-            // axios.defaults.xsrfHeaderName =  'X-CSRF-Token';
-            // axios.defaults.headers.common = {
-            //     'X-Requested-With': 'XMLHttpRequest'
-            // };
-            axios.interceptors.request.use(config => {
-                config.headers['X-CSRF-TOKEN']     = window.Laravel.csrfToken
-                config.headers['X-Requested-With'] = 'XMLHttpRequest'
-                return config
-            })
+            axios.defaults.baseURL = '';
+            // axios.defaults.headers['X-CSRF-TOKEN']     = window.Laravel.csrfToken
+            // axios.defaults.headers['X-Requested-With'] = 'XMLHttpRequest'
+            // // axios.defaults.xsrfHeaderName =  'X-CSRF-Token';
+            // // axios.defaults.headers.common = {
+            // //     'X-Requested-With': 'XMLHttpRequest'
+            // // };
+            // axios.interceptors.request.use(config => {
+            //     config.headers['X-CSRF-TOKEN']     = window.Laravel.csrfToken
+            //     config.headers['X-Requested-With'] = 'XMLHttpRequest'
+            //     return config
+            // })
             this.times = new Date();
             this.getRoom();
         },
@@ -80,7 +80,7 @@
 
             },
             getRoom(){
-                axios.get('https://kuhblume.herokuapp.com/api/roomapi/')
+                axios.get('api/roomapi/')
                     .then(response => {
                         console.log(response);
                         this.rooms = response.data;
@@ -95,7 +95,7 @@
                 //     });
             },
             createRoom(){
-                axios.post('https://kuhblume.herokuapp.com/api/postapi/' , {
+                axios.post('api/postapi/' , {
                     room_id: this.newRoomName,
                 })
                     .then(response => {
