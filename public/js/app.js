@@ -28073,7 +28073,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -28153,10 +28153,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     mounted: function mounted() {
         console.log('Top.vue mounted.'); //vue読み込みの確認
         __WEBPACK_IMPORTED_MODULE_0_axios___default.a.defaults.baseURL = 'https://kuhblume.herokuapp.com/';
+        __WEBPACK_IMPORTED_MODULE_0_axios___default.a.defaults.headers['X-CSRF-TOKEN'] = window.Laravel.csrfToken;
+        __WEBPACK_IMPORTED_MODULE_0_axios___default.a.defaults.headers['X-Requested-With'] = 'XMLHttpRequest';
         // axios.defaults.xsrfHeaderName =  'X-CSRF-Token';
         // axios.defaults.headers.common = {
         //     'X-Requested-With': 'XMLHttpRequest'
         // };
+        __WEBPACK_IMPORTED_MODULE_0_axios___default.a.interceptors.request.use(function (config) {
+            config.headers['X-CSRF-TOKEN'] = window.Laravel.csrfToken;
+            config.headers['X-Requested-With'] = 'XMLHttpRequest';
+            return config;
+        });
         this.times = new Date();
         this.getRoom();
     },
@@ -28175,8 +28182,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             serchbox: "",
             showAlert: false,
             alertMessage: '',
-            newRoomName: '',
-            times: '' //強引な時間取得プロパティ
+            newRoomName: ''
         };
     },
 
@@ -28197,7 +28203,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         getRoom: function getRoom() {
             var _this = this;
 
-            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('api/roomapi/').then(function (response) {
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('https://kuhblume.herokuapp.com/api/roomapi/').then(function (response) {
                 console.log(response);
                 _this.rooms = response.data;
             });
@@ -28213,7 +28219,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         createRoom: function createRoom() {
             var _this2 = this;
 
-            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('api/postapi/', {
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('https://kuhblume.herokuapp.com/api/postapi/', {
                 room_id: this.newRoomName
             }).then(function (response) {
                 _this2.newRoomName = '';
@@ -28221,15 +28227,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this2.alertMessage = ''; //未実装：「作成しました」という通知を表示させる
             });
         }
-    },
-    init: function init() {
-
-        // Intercept the request to make sure the token is injected into the header.
-        __WEBPACK_IMPORTED_MODULE_0_axios___default.a.interceptors.request.use(function (config) {
-            config.headers['X-CSRF-TOKEN'] = window.Laravel.csrfToken;
-            config.headers['X-Requested-With'] = 'XMLHttpRequest';
-            return config;
-        });
     }
 });
 
