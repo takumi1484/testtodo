@@ -36,6 +36,11 @@
             // axios.defaults.headers.common = {
             //     'X-Requested-With': 'XMLHttpRequest'
             // };
+            axios.interceptors.request.use(config => {
+                config.headers['X-CSRF-TOKEN']     = window.Laravel.csrfToken
+                config.headers['X-Requested-With'] = 'XMLHttpRequest'
+                return config
+            })
             this.times = new Date();
             this.getRoom();
         },
@@ -99,15 +104,6 @@
                     });
             },
         },
-        init () {
-
-            // Intercept the request to make sure the token is injected into the header.
-            axios.interceptors.request.use(config => {
-                config.headers['X-CSRF-TOKEN']     = window.Laravel.csrfToken
-                config.headers['X-Requested-With'] = 'XMLHttpRequest'
-                return config
-            })
-        }
     }
 </script>
 
