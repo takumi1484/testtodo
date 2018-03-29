@@ -99,6 +99,15 @@
                     });
             },
         },
+        init () {
+
+            // Intercept the request to make sure the token is injected into the header.
+            axios.interceptors.request.use(config => {
+                config.headers['X-CSRF-TOKEN']     = window.Laravel.csrfToken
+                config.headers['X-Requested-With'] = 'XMLHttpRequest'
+                return config
+            })
+        }
     }
 </script>
 
