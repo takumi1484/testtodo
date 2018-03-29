@@ -11,8 +11,10 @@ class PostsController extends Controller
 
     public function index()//一覧表示-get
     {
-        $items = Post::all();
-        return $items->toArray();
+//        $items = Post::all();
+//        return $items->toArray();
+
+        return Post::take(5)->get()->keyBy('id');
     }
 
     public function create()//新規作成-get
