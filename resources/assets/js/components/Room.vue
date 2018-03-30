@@ -32,7 +32,7 @@
     export default {
         mounted() {//このvueコンポーネントがマウント(読み込み)された時に一度読み込まれる
             console.log('Room.vue mounted.');   //vue読み込みの確認
-            axios.defaults.baseURL = 'https://kuhblume.herokuapp.com/';
+            // axios.defaults.baseURL = 'https://kuhblume.herokuapp.com/';
             // axios.defaults.xsrfHeaderName =  'X-CSRF-Token';
             // axios.defaults.headers.common = {
             //     'X-Requested-With': 'XMLHttpRequest'
@@ -110,7 +110,7 @@
                 let item = {                                        //新しい投稿に入れる各種データ
                     body: this.newBody,                           //フォームより入力
                     user_name: this.newName,                     //フォームより入力
-                    ip: '',//   未実装。一定時間ごとに取得することで参加者を半リアルタイムに表示させる機能
+                    ip: '00',//   未実装。一定時間ごとに取得することで参加者を半リアルタイムに表示させる機能
                     room_id: this.id,                             //room1を後で何らかの変数に変えればルーム追加できる
                     created_at: 'new post',         //作成日時。jsでなくデータベースから取れそう？むしろjsで取得した値はcreated_atに入れられないのでは？？
                     };
@@ -153,9 +153,9 @@
                         this.created_at ='new post';
                     });
             },
-            voidScan(){
-
-            }
+            // voidScan(){
+            //
+            // }
         }
     }
 </script>

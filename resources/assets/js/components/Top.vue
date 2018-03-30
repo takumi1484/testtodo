@@ -27,11 +27,11 @@
 </template>
 
 <script>
-    import axios from 'axios';
+    // import axios from 'axios';
     export default {
         mounted() {
             console.log('Top.vue mounted.');//vue読み込みの確認
-            axios.defaults.baseURL = 'https://kuhblume.herokuapp.com/';
+            // axios.defaults.baseURL = 'https://kuhblume.herokuapp.com/';
             // axios.defaults.headers['X-CSRF-TOKEN']     = window.Laravel.csrfToken
             // axios.defaults.headers['X-Requested-With'] = 'XMLHttpRequest'
             // // axios.defaults.xsrfHeaderName =  'X-CSRF-Token';
@@ -80,7 +80,7 @@
 
             },
             getRoom(){
-                axios.get('https://kuhblume.herokuapp.com/api/roomapi/')
+                axios.get('api/roomapi/')
                     .then(response => {
                         console.log(response);
                         this.rooms = response.data;
@@ -95,7 +95,7 @@
                 //     });
             },
             createRoom(){
-                axios.post('https://kuhblume.herokuapp.com/api/postapi/' , {
+                axios.post('api/roomapi/' , {
                     room_id: this.newRoomName,
                 })
                     .then(response => {
