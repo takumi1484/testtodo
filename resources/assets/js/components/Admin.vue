@@ -62,7 +62,7 @@
         },
         methods:{
             get(){
-                axios.get('api/postapi/')
+                axios.get('https://kuhblume.herokuapp.com/api/postapi/')
                     .then(response => {
                         console.log(response);
                         this.messages = response.data;
@@ -74,7 +74,7 @@
                     });
             },
             deletePost(fmes){//単なる"delete"はmethodsでも@clickでも予約語だったらしくエラーが出た
-                axios.delete('api/postapi/' + fmes.id)
+                axios.delete('https://kuhblume.herokuapp.com/api/postapi/' + fmes.id)
                     .then(res => {
                         // this.messages.splice(fmes.id-1 ,1)
                         // alert(fmes.id)

@@ -28209,7 +28209,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         getRoom: function getRoom() {
             var _this = this;
 
-            axios.get('api/roomapi/').then(function (response) {
+            axios.get('https://kuhblume.herokuapp.com/api/roomapi/').then(function (response) {
                 console.log(response);
                 _this.rooms = response.data;
             });
@@ -28225,7 +28225,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         createRoom: function createRoom() {
             var _this2 = this;
 
-            axios.post('api/roomapi/', {
+            axios.post('https://kuhblume.herokuapp.com/api/roomapi/', {
                 room_id: this.newRoomName
             }).then(function (response) {
                 _this2.newRoomName = '';
@@ -28627,7 +28627,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             // })
             //alert(this.messages);
 
-            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('api/postapi/' + this.id) //無事に取得できた。jsのオブジェクトに関する知識不足でうまくデータが取り出せなかった。オブジェクトから値を取り出すには　オブジェクト名[オブジェクト内のデータの名前]　jsの規則にのっとったデータ名(予約語、特殊文字を含まない)なら.でも呼べる
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('https://kuhblume.herokuapp.com/api/postapi/' + this.id) //無事に取得できた。jsのオブジェクトに関する知識不足でうまくデータが取り出せなかった。オブジェクトから値を取り出すには　オブジェクト名[オブジェクト内のデータの名前]　jsの規則にのっとったデータ名(予約語、特殊文字を含まない)なら.でも呼べる
             //メモ：urlからルームを直接指定できる代わりに同じルーム名にすると古いルームの内容が反映される。まああげってことで放置でいい。本当なら無二のidでルームはわける
             .then(function (response) {
                 console.log(response); //consoleによる出力はchromeの検証などから確認できる
@@ -28638,7 +28638,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         sendPost: function sendPost() {
             var _this2 = this;
 
-            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('api/postapi/', {
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('https://kuhblume.herokuapp.com/api/postapi/', {
                 body: this.newBody,
                 user_name: this.newName,
                 ip: '0000000', //////////////////////ここが''つまりnullだとエラーだった。httpエラー500。不要なカラムはエラーを呼びかねない
@@ -29839,7 +29839,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         get: function get() {
             var _this = this;
 
-            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('api/postapi/').then(function (response) {
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('https://kuhblume.herokuapp.com/api/postapi/').then(function (response) {
                 console.log(response);
                 _this.messages = response.data;
             });
@@ -29852,7 +29852,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this2 = this;
 
             //単なる"delete"はmethodsでも@clickでも予約語だったらしくエラーが出た
-            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.delete('api/postapi/' + fmes.id).then(function (res) {
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.delete('https://kuhblume.herokuapp.com/api/postapi/' + fmes.id).then(function (res) {
                 // this.messages.splice(fmes.id-1 ,1)
                 // alert(fmes.id)
                 _this2.$forceUpdate(); //jsの機能？

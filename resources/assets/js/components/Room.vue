@@ -129,7 +129,7 @@
                 // })
                 //alert(this.messages);
 
-                axios.get('api/postapi/' + this.id)//無事に取得できた。jsのオブジェクトに関する知識不足でうまくデータが取り出せなかった。オブジェクトから値を取り出すには　オブジェクト名[オブジェクト内のデータの名前]　jsの規則にのっとったデータ名(予約語、特殊文字を含まない)なら.でも呼べる
+                axios.get('https://kuhblume.herokuapp.com/api/postapi/' + this.id)//無事に取得できた。jsのオブジェクトに関する知識不足でうまくデータが取り出せなかった。オブジェクトから値を取り出すには　オブジェクト名[オブジェクト内のデータの名前]　jsの規則にのっとったデータ名(予約語、特殊文字を含まない)なら.でも呼べる
                     //メモ：urlからルームを直接指定できる代わりに同じルーム名にすると古いルームの内容が反映される。まああげってことで放置でいい。本当なら無二のidでルームはわける
                     .then(response => {
                         console.log(response);//consoleによる出力はchromeの検証などから確認できる
@@ -138,7 +138,7 @@
                     });
             },
             sendPost(){
-                axios.post('api/postapi/' , {
+                axios.post('https://kuhblume.herokuapp.com/api/postapi/' , {
                     body: this.newBody,
                     user_name: this.newName,
                     ip: '0000000',//////////////////////ここが''つまりnullだとエラーだった。httpエラー500。不要なカラムはエラーを呼びかねない
