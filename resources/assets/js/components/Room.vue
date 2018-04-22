@@ -34,6 +34,8 @@
     window.axios.defaults.headers.common = {
         'X-Requested-With': 'XMLHttpRequest'
     };
+    axios.defaults.baseURL = 'https://kuhblume.herokuapp.com';
+    axios.defaults.xsrfHeaderName =  'X-CSRF-Token';
     export default {
         mounted() {//このvueコンポーネントがマウント(読み込み)された時に一度読み込まれる
             console.log('Room.vue mounted.');   //vue読み込みの確認

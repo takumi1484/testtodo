@@ -28081,7 +28081,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -28160,6 +28160,8 @@ window.axios = __webpack_require__(5);
 window.axios.defaults.headers.common = {
     'X-Requested-With': 'XMLHttpRequest'
 };
+axios.defaults.baseURL = 'https://kuhblume.herokuapp.com';
+axios.defaults.xsrfHeaderName = 'X-CSRF-Token';
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
         console.log('Top.vue mounted.'); //vue読み込みの確認
@@ -29410,6 +29412,8 @@ window.axios = __webpack_require__(5);
 window.axios.defaults.headers.common = {
     'X-Requested-With': 'XMLHttpRequest'
 };
+axios.defaults.baseURL = 'https://kuhblume.herokuapp.com';
+axios.defaults.xsrfHeaderName = 'X-CSRF-Token';
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
         //このvueコンポーネントがマウント(読み込み)された時に一度読み込まれる
@@ -29829,7 +29833,10 @@ window.axios = __webpack_require__(5);
 
 window.axios.defaults.headers.common = {
     'X-Requested-With': 'XMLHttpRequest'
+
 };
+axios.defaults.baseURL = 'https://kuhblume.herokuapp.com';
+axios.defaults.xsrfHeaderName = 'X-CSRF-Token';
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
         // axios.defaults.baseURL = 'https://kuhblume.herokuapp.com';
