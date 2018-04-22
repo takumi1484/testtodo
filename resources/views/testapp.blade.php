@@ -21,9 +21,7 @@
     </script>
 </head>
 <body>
-<?php
-ini_set('display_errors',1);
-?>
+
 <div id="app">
     {{--routerによって切り替わる表示部分--}}
 </div>
