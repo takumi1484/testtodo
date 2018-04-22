@@ -25089,6 +25089,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__router__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_axios__);
+
 
 
 // import axios from 'axios';
@@ -25120,6 +25123,13 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 //         etext: 'TESTMESSAGE',//呼び出せてない
 //     }
 // });
+
+
+__WEBPACK_IMPORTED_MODULE_2_axios___default.a.interceptors.request.use(function (config) {
+    config.headers['X-CSRF-TOKEN'] = window.Laravel.csrfToken;
+    config.headers['X-Requested-With'] = 'XMLHttpRequest';
+    return config;
+});
 
 /***/ }),
 /* 19 */
@@ -28514,7 +28524,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     mounted: function mounted() {
         //このvueコンポーネントがマウント(読み込み)された時に一度読み込まれる
         console.log('Room.vue mounted.'); //vue読み込みの確認
-        // axios.defaults.baseURL = 'https://kuhblume.herokuapp.com/';
+        __WEBPACK_IMPORTED_MODULE_0_axios___default.a.defaults.baseURL = 'https://kuhblume.herokuapp.com/';
         // axios.defaults.xsrfHeaderName =  'X-CSRF-Token';
         // axios.defaults.headers.common = {
         //     'X-Requested-With': 'XMLHttpRequest'
