@@ -28,11 +28,11 @@
     </div>
 </template>
 <script>
-    import axios from 'axios';
+    // import axios from 'axios';
     export default {
         mounted() {//このvueコンポーネントがマウント(読み込み)された時に一度読み込まれる
             console.log('Room.vue mounted.');   //vue読み込みの確認
-            axios.defaults.baseURL = 'https://kuhblume.herokuapp.com/';
+            // axios.defaults.baseURL = 'https://kuhblume.herokuapp.com/';
             // axios.defaults.xsrfHeaderName =  'X-CSRF-Token';
             // axios.defaults.headers.common = {
             //     'X-Requested-With': 'XMLHttpRequest'

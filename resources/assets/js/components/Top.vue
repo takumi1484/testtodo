@@ -27,11 +27,11 @@
 </template>
 
 <script>
-    import axios from 'axios';
+    // import axios from 'axios';
     export default {
         mounted() {
             console.log('Top.vue mounted.');//vue読み込みの確認
-            axios.defaults.baseURL = 'https://kuhblume.herokuapp.com/';
+            // axios.defaults.baseURL = 'https://kuhblume.herokuapp.com/';
             // axios.defaults.headers['X-CSRF-TOKEN']     = window.Laravel.csrfToken
             // axios.defaults.headers['X-Requested-With'] = 'XMLHttpRequest'
             // // axios.defaults.xsrfHeaderName =  'X-CSRF-Token';
