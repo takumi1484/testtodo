@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import router from './router'
+import axios from 'axios'
 // import axios from 'axios';
 
 // axios.defaults.baseURL = 'https://kuhblume.herokuapp.com';
@@ -14,7 +15,7 @@ const app = new Vue({
     router,
     el: '#app',
     render: h => h(require('./app.vue')),
-})
+});
 // const admin = new Vue({
 //     router,
 //     el: '#admin',
@@ -28,5 +29,12 @@ const app = new Vue({
 //     }
 // });
 
+
+
+axios.interceptors.request.use(config => {
+    config.headers['X-CSRF-TOKEN']     = window.Laravel.csrfToken
+    config.headers['X-Requested-With'] = 'XMLHttpRequest'
+    return config
+});
 
 
