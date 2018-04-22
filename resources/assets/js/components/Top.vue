@@ -28,6 +28,11 @@
 
 <script>
     // import axios from 'axios';
+    window.axios = require('axios');
+
+    window.axios.defaults.headers.common = {
+        'X-Requested-With': 'XMLHttpRequest'
+    };
     export default {
         mounted() {
             console.log('Top.vue mounted.');//vue読み込みの確認

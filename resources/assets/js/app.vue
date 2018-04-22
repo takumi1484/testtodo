@@ -10,6 +10,7 @@
     export default {
         mounted() {
             console.log('app.vue mounted.')//vue読み込みの確認
+
         },
     }
 </script>

@@ -29,6 +29,11 @@
 </template>
 <script>
     // import axios from 'axios';
+    window.axios = require('axios');
+
+    window.axios.defaults.headers.common = {
+        'X-Requested-With': 'XMLHttpRequest'
+    };
     export default {
         mounted() {//このvueコンポーネントがマウント(読み込み)された時に一度読み込まれる
             console.log('Room.vue mounted.');   //vue読み込みの確認
