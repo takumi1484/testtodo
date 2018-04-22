@@ -58,8 +58,8 @@ class PostsController extends Controller
 
     public function show($room_id)//表示-get
     {
-        $item = Post::where('room_id',$room_id)->get();//urlに続けて/そしてroom_idで絞込
-        return $item->toArray();
+//        $item = Post::where('room_id',$room_id)->get();//urlに続けて/そしてroom_idで絞込
+//        return $item->toArray();
     }
 
     public function edit($id)//編集-get
