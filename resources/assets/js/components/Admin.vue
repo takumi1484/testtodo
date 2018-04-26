@@ -45,14 +45,14 @@
 
 <script>
     // import axios from 'axios';
-    window.axios = require('axios');
+    // window.axios = require('axios');
 
-    window.axios.defaults.headers.common = {
-        'X-Requested-With': 'XMLHttpRequest'
-
-    };
-    axios.defaults.baseURL = 'https://kuhblume.herokuapp.com';
-    axios.defaults.xsrfHeaderName =  'X-CSRF-Token';
+    // window.axios.defaults.headers.common = {
+    //     'X-Requested-With': 'XMLHttpRequest'
+    //
+    // };
+    // axios.defaults.baseURL = 'https://kuhblume.herokuapp.com';
+    // axios.defaults.xsrfHeaderName =  'X-CSRF-Token';
     export default {
         mounted(){
             // axios.defaults.baseURL = 'https://kuhblume.herokuapp.com';
@@ -75,7 +75,7 @@
                         console.log(response);
                         this.messages = response.data;
                     });
-                axios.get('api/roomapi/')
+                axios.get('https://kuhblume.herokuapp.com/api/roomapi/')
                     .then(response => {
                         console.log(response);
                         this.rooms = response.data;
