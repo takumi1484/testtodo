@@ -88,7 +88,7 @@
                         // alert(fmes.id)
                         this.$forceUpdate();//jsの機能？
                     });
-                this.get();
+                // this.get();
                 // this.messages.splice(fmessages.id ,1)
                 // alert(fmessages.id)
                 // delete fmessages.id;

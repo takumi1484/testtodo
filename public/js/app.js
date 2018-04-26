@@ -29875,7 +29875,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 // alert(fmes.id)
                 _this2.$forceUpdate(); //jsの機能？
             });
-            this.get();
+            // this.get();
             // this.messages.splice(fmessages.id ,1)
             // alert(fmessages.id)
             // delete fmessages.id;
