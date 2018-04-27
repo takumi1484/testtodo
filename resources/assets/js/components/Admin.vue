@@ -70,19 +70,19 @@
         },
         methods:{
             get(){
-                axios.get('https://kuhblume.herokuapp.com/api/postapi/')
+                axios.get('/api/postapi/')
                     .then(response => {
                         console.log(response);
                         this.messages = response.data;
                     });
-                axios.get('https://kuhblume.herokuapp.com/api/roomapi/')
+                axios.get('/api/roomapi/')
                     .then(response => {
                         console.log(response);
                         this.rooms = response.data;
                     });
             },
             deletePost(fmes){//単なる"delete"はmethodsでも@clickでも予約語だったらしくエラーが出た
-                axios.delete('https://kuhblume.herokuapp.com/api/postapi/' + fmes.id)
+                axios.delete('/api/postapi/' + fmes.id)
                     .then(res => {
                         // this.messages.splice(fmes.id-1 ,1)
                         // alert(fmes.id)

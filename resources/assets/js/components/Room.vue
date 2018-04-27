@@ -29,13 +29,13 @@
 </template>
 <script>
     // import axios from 'axios';
-    window.axios = require('axios');
-
-    window.axios.defaults.headers.common = {
-        'X-Requested-With': 'XMLHttpRequest'
-    };
-    axios.defaults.baseURL = 'https://kuhblume.herokuapp.com';
-    axios.defaults.xsrfHeaderName =  'X-CSRF-Token';
+    // window.axios = require('axios');
+    //
+    // window.axios.defaults.headers.common = {
+    //     'X-Requested-With': 'XMLHttpRequest'
+    // };
+    // axios.defaults.baseURL = 'https://kuhblume.herokuapp.com';
+    // axios.defaults.xsrfHeaderName =  'X-CSRF-Token';
     export default {
         mounted() {//このvueコンポーネントがマウント(読み込み)された時に一度読み込まれる
             console.log('Room.vue mounted.');   //vue読み込みの確認
@@ -53,7 +53,7 @@
         },
         data() {//テストデータ。このデータ形式に合わせてDBからデータを呼び込む
             return {
-                messages: []
+                messages: [{},]
                 //     [{
                 //     body: 'testmessage',
                 //     user_name: 'testuserA',
@@ -122,7 +122,8 @@
                     created_at: 'new post',         //作成日時。jsでなくデータベースから取れそう？むしろjsで取得した値はcreated_atに入れられないのでは？？
                     };
                 this.sendPost();
-                this.messages.push(item);                         //A.push(B) Aの配列の最後にデータBを挿入
+                // this.messages.push(item);                         //A.push(B) Aの配列の最後にデータBを挿入
+                Array.prototype.push.apply( this.messages, [item] );
                 this.newBody = '';                                 //body入力後、フォーム内を削除。(newItemはフォーム内の文字と動的に結びついている )
             },
             getPost(){
@@ -136,7 +137,7 @@
                 // })
                 //alert(this.messages);
 
-                axios.get('https://kuhblume.herokuapp.com/api/postapi/' + this.id)//無事に取得できた。jsのオブジェクトに関する知識不足でうまくデータが取り出せなかった。オブジェクトから値を取り出すには　オブジェクト名[オブジェクト内のデータの名前]　jsの規則にのっとったデータ名(予約語、特殊文字を含まない)なら.でも呼べる
+                axios.get('/api/postapi/' + this.id)//無事に取得できた。jsのオブジェクトに関する知識不足でうまくデータが取り出せなかった。オブジェクトから値を取り出すには　オブジェクト名[オブジェクト内のデータの名前]　jsの規則にのっとったデータ名(予約語、特殊文字を含まない)なら.でも呼べる
                     //メモ：urlからルームを直接指定できる代わりに同じルーム名にすると古いルームの内容が反映される。まああげってことで放置でいい。本当なら無二のidでルームはわける
                     .then(response => {
                         console.log(response);//consoleによる出力はchromeの検証などから確認できる
@@ -145,7 +146,7 @@
                     });
             },
             sendPost(){
-                axios.post('https://kuhblume.herokuapp.com/api/postapi/' , {
+                axios.post('/api/postapi/' , {
                     body: this.newBody,
                     user_name: this.newName,
                     ip: '0000000',//////////////////////ここが''つまりnullだとエラーだった。httpエラー500。不要なカラムはエラーを呼びかねない

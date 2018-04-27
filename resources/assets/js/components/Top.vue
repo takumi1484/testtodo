@@ -82,12 +82,13 @@
                     room_id: this.newRoomName,                           //フォームより入力
                     created_at: 'new ',   //作成日時。jsでなくデータベースから取れそう？むしろjsで取得した値はcreated_atに入れられないのでは？？->this.rooms.pushの処理の前に新たに作ったデータからgetすればうまくできるはず。面倒だからそれっぽくnew postでごまかす
                 };
-                this.rooms.push(newRoom);                         //A.push(B) Aの配列の最後にデータBを挿入
+                // this.rooms.push(newRoom);                         //A.push(B) Aの配列の最後にデータBを挿入
+                Array.prototype.push.apply( this.rooms, [newRoom] );//上記の書き方だとroomsの中身が空だと関数と認識されpushで配列の挿入ができない
                 this.createRoom();
 
             },
             getRoom(){
-                axios.get('https://kuhblume.herokuapp.com/api/roomapi/')
+                axios.get('/api/roomapi/')
                     .then(response => {
                         console.log(response);
                         this.rooms = response.data;
@@ -102,7 +103,7 @@
                 //     });
             },
             createRoom(){
-                axios.post('https://kuhblume.herokuapp.com/api/roomapi/' , {
+                axios.post('/api/roomapi/' , {
                     room_id: this.newRoomName,
                 })
                     .then(response => {
