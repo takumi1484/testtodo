@@ -44,7 +44,7 @@
 </template>
 
 <script>
-    // import axios from 'axios';
+    import axios from 'axios';
     // window.axios = require('axios');
 
     // window.axios.defaults.headers.common = {
@@ -60,42 +60,65 @@
             // axios.defaults.headers.common = {
             //     'X-Requested-With': 'XMLHttpRequest'
             // };
-            this.get();
+            this.loadApi();
         },
         data(){
             return{
                 messages: [],
                 rooms: [],
+                request (method, url, data, successCb = null, errorCb = null) {
+                    axios.request({
+                        url,
+                        data,
+                        method: method.toLowerCase()
+                    }).then(successCb).catch(errorCb)
+                },
+                get (url, successCb = null, errorCb = null) {
+                    return this.request('get', url, {}, successCb, errorCb)
+                },
+                post (url, data, successCb = null, errorCb = null) {
+                    return this.request('post', url, data, successCb, errorCb)
+                },
             }
         },
         methods:{
-            get(){
-                axios.get('/api/postapi/')
-                    .then(response => {
-                        console.log(response);
-                        this.messages = response.data;
-                    });
-                axios.get('/api/roomapi/')
-                    .then(response => {
-                        console.log(response);
-                        this.rooms = response.data;
-                    });
-            },
-            deletePost(fmes){//単なる"delete"はmethodsでも@clickでも予約語だったらしくエラーが出た
-                axios.delete('/api/postapi/' + fmes.id)
-                    .then(res => {
-                        // this.messages.splice(fmes.id-1 ,1)
-                        // alert(fmes.id)
-                        this.$forceUpdate();//jsの機能？
-                    });
-                // this.get();
-                // this.messages.splice(fmessages.id ,1)
-                // alert(fmessages.id)
-                // delete fmessages.id;
-                // delete this.messages[fmessages.id];
-                this.$forceUpdate();
-            },
-        }
+            // get(){
+            //     axios.get('/api/postapi/')
+            //         .then(response => {
+            //             console.log(response);
+            //             this.messages = response.data;
+            //         });
+            //     axios.get('/api/roomapi/')
+            //         .then(response => {
+            //             console.log(response);
+            //             this.rooms = response.data;
+            //         });
+            // },
+            // deletePost(fmes){//単なる"delete"はmethodsでも@clickでも予約語だったらしくエラーが出た
+            //     axios.delete('/api/postapi/' + fmes.id)
+            //         .then(res => {
+            //             // this.messages.splice(fmes.id-1 ,1)
+            //             // alert(fmes.id)
+            //             this.$forceUpdate();//jsの機能？
+            //         });
+            //     // this.get();
+            //     // this.messages.splice(fmessages.id ,1)
+            //     // alert(fmessages.id)
+            //     // delete fmessages.id;
+            //     // delete this.messages[fmessages.id];
+            //     this.$forceUpdate();
+            // },
+            //////////////////////////////////////////////////////////
+
+            loadApi(){
+                this.get('/api/postapi/' , res => {
+                    this.messages = res.data
+                })
+            }
+
+        },
+
+
     }
 </script>
 <style scoped>
