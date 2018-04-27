@@ -28960,16 +28960,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 // axios.defaults.baseURL = 'https://kuhblume.herokuapp.com';
 // axios.defaults.xsrfHeaderName =  'X-CSRF-Token';
 /* harmony default export */ __webpack_exports__["default"] = ({
-    init: function init() {
-        __WEBPACK_IMPORTED_MODULE_0_axios___default.a.defaults.baseURL = 'https://kuhblume.herokuapp.com/';
-
-        // Intercept the request to make sure the token is injected into the header.
-        __WEBPACK_IMPORTED_MODULE_0_axios___default.a.interceptors.request.use(function (config) {
-            config.headers['X-CSRF-TOKEN'] = window.Laravel.csrfToken;
-            config.headers['X-Requested-With'] = 'XMLHttpRequest';
-            return config;
-        });
-    },
     mounted: function mounted() {
         // axios.defaults.baseURL = 'https://kuhblume.herokuapp.com';
         // axios.defaults.xsrfHeaderName =  'X-CSRF-Token';
@@ -28977,6 +28967,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         //     'X-Requested-With': 'XMLHttpRequest'
         // };
         this.loadApi();
+        this.init();
     },
     data: function data() {
         return {
@@ -29003,6 +28994,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 var errorCb = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
 
                 return this.request('post', url, data, successCb, errorCb);
+            },
+            init: function init() {
+                __WEBPACK_IMPORTED_MODULE_0_axios___default.a.defaults.baseURL = 'https://kuhblume.herokuapp.com/'; ////どこにも作用していない
+
+                // Intercept the request to make sure the token is injected into the header.
+                __WEBPACK_IMPORTED_MODULE_0_axios___default.a.interceptors.request.use(function (config) {
+                    config.headers['X-CSRF-TOKEN'] = window.Laravel.csrfToken;
+                    config.headers['X-Requested-With'] = 'XMLHttpRequest';
+                    return config;
+                });
+                alert("init");
             }
         };
     },
