@@ -7,7 +7,7 @@ use App\Room;
 
 class RoomsController extends Controller
 {
-//    protected $post;
+    protected $post;
 
     public function index()//一覧表示-get//uriの後に何も書かないとこっちが呼び出される
     {

@@ -7,7 +7,7 @@ use App\Post;
 
 class PostsController extends Controller
 {
-//    protected $post;
+    protected $post;
 
     public function index()//一覧表示-get
     {
