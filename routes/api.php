@@ -18,9 +18,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::group(['middleware' => 'api'], function () {
+//Route::group(['middleware' => 'api'], function () {
     Route::resource('postapi','PostsController');
-});
+//});
 
 //Route::group(['middleware' => 'api'], function () {
 //    Route::resource('roomapi','RoomsController');
