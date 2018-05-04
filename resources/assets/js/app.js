@@ -3,6 +3,8 @@ import router from './router'
 import axios from 'axios'
 // import axios from 'axios';
 
+window.Vue = require('vue');
+window.axios = require('axios');
 // axios.defaults.baseURL = 'https://kuhblume.herokuapp.com';
 // axios.defaults.xsrfHeaderName =  'X-CSRF-Token';
 // axios.defaults.headers.common = {
