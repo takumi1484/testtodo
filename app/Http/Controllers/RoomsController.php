@@ -11,9 +11,9 @@ class RoomsController extends Controller
 
     public function index()//一覧表示-get//uriの後に何も書かないとこっちが呼び出される
     {
-//        $items = Room::all();
-//        return $items->toArray();
-        return Room::take(5)->get()->keyBy('id');
+        $items = Room::all();
+        return $items->toArray();
+//        return Room::take(5)->get()->keyBy('id');
     }
 
     public function create()//新規作成-get
